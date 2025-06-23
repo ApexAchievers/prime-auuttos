@@ -3,7 +3,7 @@ import { Home, Layers, PackageSearch, Phone } from 'lucide-react';
 export default function Sidebar({ isOpen }) {
   return (
     <div
-      className={`fixed top-[96] left-0 h-[calc(100%-96px)] w-60 bg-black p-6 shadow-md transform transition-transform duration-300 ${
+      className={`fixed top-[96] left-0 z-50 h-[calc(100%-96px)] w-60 bg-black p-6 shadow-md transform transition-transform duration-300 ${
         isOpen ? 'translate-x-0' : '-translate-x-full'
       }`}
     >
