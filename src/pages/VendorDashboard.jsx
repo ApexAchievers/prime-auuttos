@@ -1,6 +1,724 @@
-// VendorDashboard.jsx
+import { useState } from 'react';
+import { Plus, Edit, Trash2, Eye, ToggleLeft, ToggleRight, ChevronLeft, ChevronRight, LogOut, User, X, Settings, Search, Filter } from 'lucide-react';
+import { Link } from 'react-router';
+
 export default function VendorDashboard() {
-  return (
-    <div></div>
-  );
+    const [currentPage, setCurrentPage] = useState(1);
+    const [showProfileModal, setShowProfileModal] = useState(false);
+    const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
+    const [showFilters, setShowFilters] = useState(false);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [filters, setFilters] = useState({
+        category: '',
+        status: '',
+        brand: '',
+
+    });
+    const [profileData, setProfileData] = useState({
+        name: 'Kojo oppong',
+        email: 'princedarf1@gmail.com',
+        phone: '+233 24 123 4567',
+        company: 'Auto Parts Ghana',
+        address: 'Accra, Ghana'
+    });
+    const itemsPerPage = 10;
+
+    const advert = [
+        {
+            id: 1,
+            image: 'https://neobrake.com/wp-content/uploads/2016/06/NeoBrake-Air-Disc-Brake-Pads-2.1.png',
+            title: 'Ceramic Brake Pads',
+            brand: 'Bosch',
+            category: 'Braking System',
+            status: 'Available',
+            created: '2025-06-01T10:00:00Z',
+            price: 'GHc75.00',
+        },
+        {
+            id: 4,
+            image: 'https://neobrake.com/wp-content/uploads/2016/06/NeoBrake-Air-Disc-Brake-Pads-2.1.png',
+            title: 'Ceramic Brake Pads',
+            brand: 'Bosch',
+            category: 'Braking System',
+            status: 'Available',
+            created: '2025-06-01T10:00:00Z',
+            price: 'GHc75.00',
+        },
+        {
+            id: 2,
+            image: 'https://media.istockphoto.com/id/1282831927/photo/power-steering-rack.jpg?s=612x612&w=0&k=20&c=RSzMcW5KifTRjsea8B0rOCYd4aeD_CcBfdQlgWuTgx4=',
+            title: 'Steering Rack',
+            brand: 'Toyota',
+            category: 'Steering System',
+            status: 'Not available',
+            created: '2025-06-01T10:00:00Z',
+            price: 'GHc400.00',
+        },
+        {
+            id: 3,
+            image: 'https://media.istockphoto.com/id/1282831927/photo/power-steering-rack.jpg?s=612x612&w=0&k=20&c=RSzMcW5KifTRjsea8B0rOCYd4aeD_CcBfdQlgWuTgx4=',
+            title: 'Power Steering Pump',
+            brand: 'Honda',
+            category: 'Steering System',
+            status: 'Available',
+            created: '2025-06-01T10:00:00Z',
+            price: 'GHc350.00',
+        },
+        {
+            id: 5,
+            image: 'https://media.istockphoto.com/id/1282831927/photo/power-steering-rack.jpg?s=612x612&w=0&k=20&c=RSzMcW5KifTRjsea8B0rOCYd4aeD_CcBfdQlgWuTgx4=',
+            title: 'Oil Filter',
+            brand: 'Fram',
+            category: 'Engine Parts',
+            status: 'Available',
+            created: '2025-06-01T10:00:00Z',
+            price: 'GHc25.00',
+        },
+        {
+            id: 6,
+            image: 'https://media.istockphoto.com/id/1282831927/photo/power-steering-rack.jpg?s=612x612&w=0&k=20&c=RSzMcW5KifTRjsea8B0rOCYd4aeD_CcBfdQlgWuTgx4=',
+            title: 'Air Filter',
+            brand: 'K&N',
+            category: 'Engine Parts',
+            status: 'Not available',
+            created: '2025-06-01T10:00:00Z',
+            price: 'GHc45.00',
+        },
+        {
+            id: 7,
+            image: 'https://media.istockphoto.com/id/1282831927/photo/power-steering-rack.jpg?s=612x612&w=0&k=20&c=RSzMcW5KifTRjsea8B0rOCYd4aeD_CcBfdQlgWuTgx4=',
+            title: 'Spark Plugs',
+            brand: 'NGK',
+            category: 'Engine Parts',
+            status: 'Available',
+            created: '2025-06-01T10:00:00Z',
+            price: 'GHc15.00',
+        },
+        {
+            id: 8,
+            image: 'https://media.istockphoto.com/id/1282831927/photo/power-steering-rack.jpg?s=612x612&w=0&k=20&c=RSzMcW5KifTRjsea8B0rOCYd4aeD_CcBfdQlgWuTgx4=',
+            title: 'Brake Discs',
+            brand: 'Brembo',
+            category: 'Braking System',
+            status: 'Available',
+            created: '2025-06-01T10:00:00Z',
+            price: 'GHc120.00',
+        },
+        {
+            id: 9,
+            image: 'https://media.istockphoto.com/id/1282831927/photo/power-steering-rack.jpg?s=612x612&w=0&k=20&c=RSzMcW5KifTRjsea8B0rOCYd4aeD_CcBfdQlgWuTgx4=',
+            title: 'Headlight Bulbs',
+            brand: 'Philips',
+            category: 'Electrical',
+            status: 'Available',
+            created: '2025-06-01T10:00:00Z',
+            price: 'GHc30.00',
+        },
+        {
+            id: 10,
+            image: 'https://media.istockphoto.com/id/1282831927/photo/power-steering-rack.jpg?s=612x612&w=0&k=20&c=RSzMcW5KifTRjsea8B0rOCYd4aeD_CcBfdQlgWuTgx4=',
+            title: 'Battery',
+            brand: 'Exide',
+            category: 'Electrical',
+            status: 'Not available',
+            created: '2025-06-01T10:00:00Z',
+            price: 'GHc180.00',
+        },
+        {
+            id: 11,
+            image: 'https://media.istockphoto.com/id/1282831927/photo/power-steering-rack.jpg?s=612x612&w=0&k=20&c=RSzMcW5KifTRjsea8B0rOCYd4aeD_CcBfdQlgWuTgx4=',
+            title: 'Alternator',
+            brand: 'Bosch',
+            category: 'Electrical',
+            status: 'Available',
+            created: '2025-06-01T10:00:00Z',
+            price: 'GHc250.00',
+        },
+        {
+            id: 12,
+            image: 'https://media.istockphoto.com/id/1282831927/photo/power-steering-rack.jpg?s=612x612&w=0&k=20&c=RSzMcW5KifTRjsea8B0rOCYd4aeD_CcBfdQlgWuTgx4=',
+            title: 'Radiator',
+            brand: 'Denso',
+            category: 'Cooling System',
+            status: 'Available',
+            created: '2025-06-01T10:00:00Z',
+            price: 'GHc320.00',
+        },
+    ];
+
+    // Get unique values for filter options
+    const categories = [...new Set(advert.map(ad => ad.category))];
+    const brands = [...new Set(advert.map(ad => ad.brand))];
+    const statuses = [...new Set(advert.map(ad => ad.status))];
+
+    // Filter and search logic
+    const filteredAdverts = advert.filter(ad => {
+        const matchesSearch = ad.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            ad.brand.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            ad.category.toLowerCase().includes(searchTerm.toLowerCase());
+
+        const matchesCategory = !filters.category || ad.category === filters.category;
+        const matchesStatus = !filters.status || ad.status === filters.status;
+        const matchesBrand = !filters.brand || ad.brand === filters.brand;
+
+        return matchesSearch && matchesCategory && matchesStatus && matchesBrand;
+    });
+
+    // Pagination logic
+    const totalPages = Math.ceil(filteredAdverts.length / itemsPerPage);
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const currentAdverts = filteredAdverts.slice(startIndex, startIndex + itemsPerPage);
+
+    const goToPage = (page) => {
+        setCurrentPage(page);
+    };
+
+    const handleFilterChange = (filterType, value) => {
+        setFilters(prev => ({
+            ...prev,
+            [filterType]: value
+        }));
+        setCurrentPage(1); // Reset to first page when filtering
+    };
+
+    const clearFilters = () => {
+        setFilters({
+            category: '',
+            status: '',
+            brand: ''
+        });
+        setSearchTerm('');
+        setCurrentPage(1);
+    };
+
+    const handleProfileUpdate = () => {
+        // Here you would typically make an API call to update the profile
+        console.log('Profile updated:', profileData);
+        setShowProfileModal(false);
+        // Show success message or toast
+    };
+
+    const handleLogout = () => {
+        // Here you would typically clear session/tokens and redirect
+        console.log('Logging out...');
+        setShowLogoutConfirm(false);
+        // Redirect to login page
+    };
+
+    const handleInputChange = (field, value) => {
+        setProfileData(prev => ({
+            ...prev,
+            [field]: value
+        }));
+    };
+
+    const renderAdverts = () => {
+        return currentAdverts.map((ad) => (
+            <tr key={ad.id} className="border-b border-gray-100 hover:bg-gray-50 transition-colors duration-150">
+                <td className="py-1.5 px-3">
+                    <div className="flex items-center gap-2">
+                        <img
+                            src={ad.image}
+                            alt={ad.title}
+                            className="w-8 h-8 rounded object-cover flex-shrink-0"
+                        />
+                        <span className="text-xs font-medium text-gray-900">{ad.title}</span>
+                    </div>
+                </td>
+                <td className="py-1.5 px-3 text-xs font-semibold text-gray-900">{ad.price}</td>
+                <td className="py-1.5 px-3 text-xs text-gray-600">{ad.category}</td>
+                <td className="py-1.5 px-3 text-xs text-gray-600">{ad.brand}</td>
+                <td className="py-1.5 px-3">
+                    <span className={`inline-flex px-2 py-0.5 text-xs font-medium rounded-full ${ad.status === 'Available'
+                        ? 'bg-green-100 text-green-800'
+                        : 'bg-red-100 text-red-800'
+                        }`}>
+                        {ad.status}
+                    </span>
+                </td>
+                <td className="py-1.5 px-3 text-xs text-gray-600">
+                    {new Date(ad.created).toDateString()}
+                </td>
+                <td className="py-1.5 px-3">
+                    <div className="flex gap-1">
+                        <Link to="/view-product">
+                            <button
+                                className="w-6 h-6 flex items-center justify-center rounded bg-blue-50 text-blue-600 hover:bg-blue-100 hover:scale-110 transition-all duration-200"
+                                title="View"
+                            >
+                                <Eye size={12} />
+                            </button>
+                        </Link>
+                        <Link to="/edit-product">
+                            <button
+                                className="w-6 h-6 flex items-center justify-center rounded bg-green-50 text-green-600 hover:bg-green-100 hover:scale-110 transition-all duration-200"
+                                title="Edit"
+                            >
+                                <Edit size={12} />
+                            </button>
+                        </Link>
+                        <Link>
+                            <button
+                                className="w-6 h-6 flex items-center justify-center rounded bg-red-50 text-red-600 hover:bg-red-100 hover:scale-110 transition-all duration-200"
+                                title="Delete"
+                            >
+                                <Trash2 size={12} />
+                            </button>
+                        </Link>
+                    </div>
+                </td>
+            </tr>
+        ));
+    };
+
+    return (
+        <>
+
+            <div className="p-6 bg-white min-h-screen">
+                {/* Header with Profile and Logout */}
+                <div className="flex justify-between items-start mb-6">
+                    <div>
+                        <h1 className="text-3xl font-bold text-gray-900">Vendor Dashboard</h1>
+                        <p className="text-gray-800 mt-1">
+                            Welcome back, <span className="text-blue-500">{profileData.name}</span>
+                        </p>
+                    </div>
+                    <div className="flex items-center gap-3">
+                        <button
+                            onClick={() => setShowProfileModal(true)}
+                            className="flex items-center gap-2 bg-black hover:bg-gray-400 text-white font-medium px-4 py-2 rounded-lg transition-colors cursor-pointer"
+                        >
+                            <Settings size={16} />
+                            Profile
+                        </button>
+                        <Link to="/add-product">
+                            <button className="bg-black hover:bg-gray-400 text-white font-medium px-5 py-2 rounded-lg cursor-pointer">
+                                + Post New Advert
+                            </button>
+                        </Link>
+                        <button
+                            onClick={() => setShowLogoutConfirm(true)}
+                            className="flex items-center gap-2 bg-red-100 hover:bg-red-200 text-red-700 font-medium px-4 py-2 rounded-lg transition-colors cursor-pointer"
+                        >
+                            <LogOut size={16} />
+                            Logout
+                        </button>
+                    </div>
+                </div>
+
+                {/* Stats */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+                    <div className="bg-white p-6 rounded-lg shadow">
+                        <p className="text-gray-700 font-semibold mb-2">Total Adverts</p>
+                        <p className="text-blue-600 text-4xl font-bold">{advert.length}</p>
+                    </div>
+                    <div className="bg-white p-6 rounded-lg shadow">
+                        <p className="text-gray-700 font-semibold mb-2">Active Adverts</p>
+                        <p className="text-green-600 text-4xl font-bold">
+                            {advert.filter((ad) => ad.status === 'Available').length}
+                        </p>
+                    </div>
+                    <div className="bg-white p-6 rounded-lg shadow">
+                        <p className="text-gray-700 font-semibold mb-2">Inactive Adverts</p>
+                        <p className="text-gray-600 text-4xl font-bold">
+                            {advert.filter((ad) => ad.status !== 'Available').length}
+                        </p>
+                    </div>
+                </div>
+
+                {/* Search and Filter Section */}
+                <div className="bg-white rounded-lg shadow mb-6 p-4">
+                    <div className="flex flex-col sm:flex-row gap-4 items-center">
+                        {/* Search Bar */}
+                        <div className="relative flex-1">
+                            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
+                            <input
+                                type="text"
+                                placeholder="Search products, brands, or categories..."
+                                value={searchTerm}
+                                onChange={(e) => {
+                                    setSearchTerm(e.target.value);
+                                    setCurrentPage(1);
+                                }}
+                                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            />
+                        </div>
+
+                        {/* Filter Toggle Button */}
+                        <button
+                            onClick={() => setShowFilters(!showFilters)}
+                            className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-colors ${showFilters ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                }`}
+                        >
+                            <Filter size={16} />
+                            Filters
+                            {(filters.category || filters.status || filters.brand) && (
+                                <span className="bg-blue-600 text-white text-xs rounded-full px-2 py-0.5 ml-1">
+                                    {[filters.category, filters.status, filters.brand].filter(Boolean).length}
+                                </span>
+                            )}
+                        </button>
+                    </div>
+
+                    {/* Filter Controls */}
+                    {showFilters && (
+                        <div className="mt-4 pt-4 border-t border-gray-200">
+                            <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4 items-end">
+                                {/* Category Filter */}
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
+                                    <select
+                                        value={filters.category}
+                                        onChange={(e) => handleFilterChange('category', e.target.value)}
+                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    >
+                                        <option value="">All Categories</option>
+                                        {categories.map(category => (
+                                            <option key={category} value={category}>{category}</option>
+                                        ))}
+                                    </select>
+                                </div>
+
+                                {/* Brand Filter */}
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">Brand</label>
+                                    <select
+                                        value={filters.brand}
+                                        onChange={(e) => handleFilterChange('brand', e.target.value)}
+                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    >
+                                        <option value="">All Brands</option>
+                                        {brands.map(brand => (
+                                            <option key={brand} value={brand}>{brand}</option>
+                                        ))}
+                                    </select>
+                                </div>
+
+                                {/* Status Filter */}
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                                    <select
+                                        value={filters.status}
+                                        onChange={(e) => handleFilterChange('status', e.target.value)}
+                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    >
+                                        <option value="">All Statuses</option>
+                                        {statuses.map(status => (
+                                            <option key={status} value={status}>{status}</option>
+                                        ))}
+                                    </select>
+                                </div>
+
+                                {/* Clear Filters Button */}
+                                <div>
+                                    <button
+                                        onClick={clearFilters}
+                                        className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium px-4 py-2 rounded-md transition-colors"
+                                    >
+                                        Clear All
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Active Filters Display */}
+                    {(filters.category || filters.status || filters.brand || searchTerm) && (
+                        <div className="mt-3 flex flex-wrap gap-2">
+                            {searchTerm && (
+                                <span className="inline-flex items-center gap-1 bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">
+                                    Search: "{searchTerm}"
+                                    <button onClick={() => { setSearchTerm(''); setCurrentPage(1); }}>
+                                        <X size={14} />
+                                    </button>
+                                </span>
+                            )}
+                            {filters.category && (
+                                <span className="inline-flex items-center gap-1 bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">
+                                    Category: {filters.category}
+                                    <button onClick={() => handleFilterChange('category', '')}>
+                                        <X size={14} />
+                                    </button>
+                                </span>
+                            )}
+                            {filters.brand && (
+                                <span className="inline-flex items-center gap-1 bg-purple-100 text-purple-800 text-sm px-3 py-1 rounded-full">
+                                    Brand: {filters.brand}
+                                    <button onClick={() => handleFilterChange('brand', '')}>
+                                        <X size={14} />
+                                    </button>
+                                </span>
+                            )}
+                            {filters.status && (
+                                <span className="inline-flex items-center gap-1 bg-orange-100 text-orange-800 text-sm px-3 py-1 rounded-full">
+                                    Status: {filters.status}
+                                    <button onClick={() => handleFilterChange('status', '')}>
+                                        <X size={14} />
+                                    </button>
+                                </span>
+                            )}
+                        </div>
+                    )}
+                </div>
+
+                {/* Results Summary */}
+                {filteredAdverts.length !== advert.length && (
+                    <div className="mb-4">
+                        <p className="text-gray-600">
+                            Showing {filteredAdverts.length} of {advert.length} adverts
+                            {searchTerm && ` for "${searchTerm}"`}
+                        </p>
+                    </div>
+                )}
+
+                {/* Empty State - Show when no adverts or no filtered results */}
+                {advert.length === 0 && (
+                    <div className="bg-gray-100 opacity-80 rounded-lg shadow p-10 text-center">
+                        <h2 className="text-xl font-semibold mb-2">Your Adverts</h2>
+                        <div className="text-gray-400 text-5xl mb-4">+</div>
+                        <p className="text-gray-700 font-medium mb-1">No adverts yet</p>
+                        <p className="mb-4">Post your first Ad, your Customers waiting!!</p>
+
+                        <Link to='/add-product'>
+                            <button className="bg-black hover:bg-gray-400 text-white font-medium px-6 py-2 rounded-lg">
+                                + Post Your First Advert
+                            </button>
+                        </Link>
+                    </div>
+                )}
+
+                {/* No Results State */}
+                {advert.length > 0 && filteredAdverts.length === 0 && (
+                    <div className="bg-white rounded-lg shadow p-10 text-center">
+                        <div className="text-gray-400 text-5xl mb-4">🔍</div>
+                        <h2 className="text-xl font-semibold mb-2">No Results Found</h2>
+                        <p className="text-gray-600 mb-4">
+                            No adverts match your current search and filter criteria.
+                        </p>
+                        <button
+                            onClick={clearFilters}
+                            className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-2 rounded-lg"
+                        >
+                            Clear Filters
+                        </button>
+                    </div>
+                )}
+
+                {/* Posts Table - Only show when there are filtered adverts */}
+                {filteredAdverts.length > 0 && (
+                    <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+                        <div className="p-4 border-b border-gray-200">
+                            <h2 className="text-xl font-semibold text-gray-900">Your Posts</h2>
+                        </div>
+
+                        <div className="overflow-x-auto">
+                            <table className="w-full">
+                                <thead className="bg-gray-50">
+                                    <tr>
+                                        <th className="py-2 px-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                                            Product
+                                        </th>
+                                        <th className="py-2 px-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                                            Price
+                                        </th>
+                                        <th className="py-2 px-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                                            Category
+                                        </th>
+                                        <th className="py-2 px-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                                            Brand
+                                        </th>
+                                        <th className="py-2 px-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                                            Status
+                                        </th>
+                                        <th className="py-2 px-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                                            Created
+                                        </th>
+                                        <th className="py-2 px-3 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                                            Actions
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody className="bg-white divide-y divide-gray-100">
+                                    {renderAdverts()}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        {/* Pagination */}
+                        {totalPages > 1 && (
+                            <div className="px-4 py-3 bg-gray-50 border-t border-gray-200 flex items-center justify-between">
+                                <span className="text-sm text-gray-600">
+                                    Showing {startIndex + 1}-{Math.min(startIndex + itemsPerPage, filteredAdverts.length)} of {filteredAdverts.length} items
+                                </span>
+                                <div className="flex items-center space-x-1">
+                                    <button
+                                        onClick={() => goToPage(currentPage - 1)}
+                                        disabled={currentPage === 1}
+                                        className="px-2 py-1 text-sm border border-gray-300 rounded bg-white text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+                                    >
+                                        <ChevronLeft size={14} className="mr-1" />
+                                        Previous
+                                    </button>
+                                    {[...Array(totalPages)].map((_, i) => (
+                                        <button
+                                            key={i + 1}
+                                            onClick={() => goToPage(i + 1)}
+                                            className={`px-2 py-1 text-sm border rounded ${currentPage === i + 1
+                                                ? 'bg-blue-600 text-white border-blue-600'
+                                                : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
+                                                }`}
+                                        >
+                                            {i + 1}
+                                        </button>
+                                    ))}
+                                    <button
+                                        onClick={() => goToPage(currentPage + 1)}
+                                        disabled={currentPage === totalPages}
+                                        className="px-2 py-1 text-sm border border-gray-300 rounded bg-white text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+                                    >
+                                        Next
+                                        <ChevronRight size={14} className="ml-1" />
+                                    </button>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                )}
+
+                {/* Profile Edit Modal */}
+                {showProfileModal && (
+                    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+                        <div className="bg-white rounded-lg w-full max-w-md max-h-[90vh] overflow-y-auto">
+                            <div className="p-6">
+                                <div className="flex justify-between items-center mb-6">
+                                    <h2 className="text-2xl font-bold text-gray-900">Edit Profile</h2>
+                                    <button
+                                        onClick={() => setShowProfileModal(false)}
+                                        className="text-gray-400 hover:text-gray-600 transition-colors"
+                                    >
+                                        <X size={24} />
+                                    </button>
+                                </div>
+
+                                <div className="space-y-4">
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                                            Full Name
+                                        </label>
+                                        <input
+                                            type="text"
+                                            value={profileData.name}
+                                            onChange={(e) => handleInputChange('name', e.target.value)}
+                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            required
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                                            Email
+                                        </label>
+                                        <input
+                                            type="email"
+                                            value={profileData.email}
+                                            onChange={(e) => handleInputChange('email', e.target.value)}
+                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            required
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                                            Phone Number
+                                        </label>
+                                        <input
+                                            type="tel"
+                                            value={profileData.phone}
+                                            onChange={(e) => handleInputChange('phone', e.target.value)}
+                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            required
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                                            Business Name
+                                        </label>
+                                        <input
+                                            type="text"
+                                            value={profileData.businessName}
+                                            onChange={(e) => handleInputChange('businessName', e.target.value)}
+                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            required
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                                            Business Address
+                                        </label>
+                                        <textarea
+                                            value={profileData.address}
+                                            onChange={(e) => handleInputChange('address', e.target.value)}
+                                            rows={3}
+                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            required
+                                        />
+                                    </div>
+
+                                    <div className="flex gap-3 pt-4">
+                                        <button
+                                            onClick={handleProfileUpdate}
+                                            className="flex-1 bg-black hover:bg-gray-400 text-white font-medium py-2 px-4 rounded-md transition-colors"
+                                        >
+                                            Save Changes
+                                        </button>
+                                        <button
+                                            onClick={() => setShowProfileModal()}
+                                            className="flex-1 bg-black hover:bg-gray-400 text-white font-medium py-2 px-4 rounded-md transition-colors"
+                                        >
+                                            Cancel
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {/* Logout Confirmation Modal */}
+                {showLogoutConfirm && (
+                    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+                        <div className="bg-white rounded-lg w-full max-w-sm">
+                            <div className="p-6">
+                                <div className="flex items-center justify-center w-12 h-12 mx-auto mb-4 bg-red-100 rounded-full">
+                                    <LogOut className="w-6 h-6 text-red-600" />
+                                </div>
+                                <h2 className="text-xl font-bold text-gray-900 text-center mb-2">
+                                    Confirm Logout
+                                </h2>
+                                <p className="text-gray-600 text-center mb-6">
+                                    Are you sure you want to logout? You'll need to sign in again to access your dashboard.
+                                </p>
+                                <div className="flex gap-3">
+                                    <button
+                                        onClick={handleLogout}
+                                        className="flex-1 bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-md transition-colors"
+                                    >
+                                        Yes, Logout
+                                    </button>
+                                    <button
+                                        onClick={() => setShowLogoutConfirm(false)}
+                                        className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 font-medium py-2 px-4 rounded-md transition-colors"
+                                    >
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+            </div>
+        </>
+    );
 }
