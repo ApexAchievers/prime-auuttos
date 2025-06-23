@@ -38,7 +38,7 @@ const heroImages = [
     url: bike2,
     title: 'Ride with Freedom',
     subtitle: 'Two wheels, endless adventure — built for speed',
-    textColor: 'text-lime-400'
+    textColor: 'text-gray-300'
   },
   {
     url: truck,
@@ -160,7 +160,7 @@ export default function Home() {
         {/* Hero Section with Auto-scrolling Images */}
         <div className="bg-white py-5 md:py-12">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="relative h-[300px] md:h-[400px] lg:h-[500px] overflow-hidden rounded-sm shadow-xl">
+            <div className="relative h-[300px] md:h-[400px] lg:h-[500px] overflow-hidden rounded-sm shadow-xl -mt-12">
               {!isFading ? (
                 <div
                   className="flex transition-transform duration-700 ease-in-out h-full"
