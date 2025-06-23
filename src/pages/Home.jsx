@@ -154,7 +154,7 @@ export default function Home() {
 
   return (
 
-    <>    
+    <>
       <div className="min-h-screen bg-white">
 
         {/* Hero Section with Auto-scrolling Images */}
@@ -313,12 +313,13 @@ export default function Home() {
                   ))}
                 </div>
               </div>
-
-              <div className="text-center mt-12">
-                <button className="bg-orange-700 hover:bg-white hover:border-2 hover:border-orange-700 hover:text-black text-white px-8 py-3 rounded-lg text-lg font-semibold transition-colors">
-                  View All Products
-                </button>
-              </div>
+              <Link to="/view-product">
+                <div className="text-center mt-12">
+                  <button className="bg-orange-700 hover:bg-white hover:border-2 hover:border-orange-700 hover:text-black text-white px-8 py-3 rounded-lg text-lg font-semibold transition-colors">
+                    View All Products
+                  </button>
+                </div>
+              </Link>
             </div>
           </section>
         </div>
