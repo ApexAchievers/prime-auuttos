@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
+import ScrollToTop from "../components/ScrollToTop";
 import { Outlet } from 'react-router-dom';
 
 export default function MainLayout() {
@@ -26,6 +27,7 @@ export default function MainLayout() {
 
   return (
     <div className="relative">
+      <ScrollToTop />
       <Navbar onToggle={() => setIsSidebarOpen(!isSidebarOpen)} />
       <div ref={sidebarRef}>
         <Sidebar isOpen={isSidebarOpen} />

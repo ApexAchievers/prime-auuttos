@@ -218,7 +218,7 @@ export default function Home() {
             </div>
           </div>
 
-          <section className="py-5 bg-white">
+          <div className="py-5 bg-white">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="space-y-2">
                 {/* Row 1 - 4 items */}
@@ -226,7 +226,7 @@ export default function Home() {
                   {row1.map((product) => (
                     <div
                       key={product.id}
-                      className="bg-white rounded-lg shadow-xl transition-shadow group cursor-pointer overflow-hidden p-4"
+                      className="bg-white shadow-2xl transition-shadow group cursor-pointer overflow-hidden p-4"
                     >
                       <div className="relative">
                         <div className="mt-2 text-center">
@@ -249,7 +249,7 @@ export default function Home() {
                   {row2.map((product) => (
                     <div
                       key={product.id}
-                      className="bg-white rounded-lg shadow-xl transition-shadow group cursor-pointer overflow-hidden p-4"
+                      className="bg-white shadow-2xl transition-shadow group cursor-pointer overflow-hidden p-4"
                     >
                       <div className="relative">
                         <div className="mt-2 text-center">
@@ -272,7 +272,7 @@ export default function Home() {
                   {row3.map((product) => (
                     <div
                       key={product.id}
-                      className="bg-white rounded-lg shadow-xl hover:shadow-xl transition-shadow group cursor-pointer overflow-hidden p-4"
+                      className="bg-white shadow-2xl hover:shadow-xl transition-shadow group cursor-pointer overflow-hidden p-4"
                     >
                       <div className="relative">
                         <div className="mt-2 text-center">
@@ -295,7 +295,7 @@ export default function Home() {
                   {row4.map((product) => (
                     <div
                       key={product.id}
-                      className="bg-white rounded-lg shadow-xl hover:shadow-xl transition-shadow group cursor-pointer overflow-hidden p-4"
+                      className="bg-white shadow-2xl hover:shadow-xl transition-shadow group cursor-pointer overflow-hidden p-4"
                     >
                       <div className="relative">
                         <div className="mt-2 text-center">
@@ -315,13 +315,23 @@ export default function Home() {
               </div>
               <Link to="/view-product">
                 <div className="text-center mt-12">
-                  <button className="bg-orange-700 hover:bg-white hover:border-2 hover:border-orange-700 hover:text-black text-white px-8 py-3 rounded-lg text-lg font-semibold transition-colors">
-                    View All Products
+                  <button className="relative overflow-hidden bg-orange-700 text-white px-8 py-3 rounded-lg text-lg font-semibold transition-colors duration-300 group border-1 border-transparent group-hover:border-orange-700 cursor-pointer">
+                    <span className="relative z-10 transition-colors duration-300 group-hover:text-orange-700">
+                      View All Products
+                    </span>
+                    <span
+                      className="absolute inset-0 bg-white transition-transform duration-300 translate-x-full group-hover:translate-x-0"
+                      aria-hidden="true"
+                    ></span>
+                    <span
+                      className="absolute inset-0 bg-orange-700 transition-transform duration-300 group-hover:translate-x-full"
+                      aria-hidden="true"
+                    ></span>
                   </button>
                 </div>
               </Link>
             </div>
-          </section>
+          </div>
         </div>
       </div>
       <Footer />
