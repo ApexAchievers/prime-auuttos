@@ -7,6 +7,9 @@ import AddProduct from "./pages/AddProduct";
 import EditProduct from "./pages/EditProduct";
 import ViewProduct from "./pages/ViewProduct";
 import VendorDashboard from "./pages/VendorDashboard";
+import CartTest from "./pages/CartTestPage";
+import CartProvider from "./context/CartContext";
+
 
 const primeAuttosRouter = createBrowserRouter([
 
@@ -21,6 +24,7 @@ const primeAuttosRouter = createBrowserRouter([
       { path: "/edit-product", element: <EditProduct /> },
       { path: "/view-product", element: <ViewProduct /> },
       { path: "/vendor-dashboard", element: <VendorDashboard /> },
+      { path: "/cart-test", element: <CartTest /> },
 
     ]
   }
@@ -28,12 +32,9 @@ const primeAuttosRouter = createBrowserRouter([
 
 function App() {
   return (
-    <>
+    <CartProvider> 
       <RouterProvider router={primeAuttosRouter} />
-
-
-    </>
+    </CartProvider>
   );
 }
-
 export default App;

@@ -5,7 +5,7 @@ import { Link } from "react-router";
 
 export default function Navbar({ onToggle }) {
     return (
-        <nav className="w-full bg-black text-white px-4 py-4">
+        <nav className="fixed top-0 left-0 w-full z-50 bg-black text-white p-4 shadow-md">
             <div className="flex items-center justify-between gap-4 flex-wrap">
                 {/* Left: Menu + Logo */}
                 <div className="flex items-center gap-4">
@@ -39,10 +39,17 @@ export default function Navbar({ onToggle }) {
                         <User className="w-6 h-6 bg-white text-black rounded-full p-1" />
                         <span className="text-sm">Login</span>
                     </Link>
+                    
+                    <Link to="/cart-test">
                     <ShoppingCart className="w-5 h-5" />
+                    </Link>
                 </div>
             </div>
         </nav>
 
     );
 }
+
+
+
+
