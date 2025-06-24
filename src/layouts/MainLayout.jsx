@@ -8,9 +8,9 @@ export default function MainLayout() {
   return (
     <div className="relative">
       <ScrollToTop />
-      <Navbar onToggle={() => setIsSidebarOpen(!isSidebarOpen)} />
-      <div ref={sidebarRef}>
-        <Sidebar isOpen={isSidebarOpen} />
+      {/* <Navbar onToggle={() => setIsSidebarOpen(!isSidebarOpen)} /> */}
+      <div>
+        <Sidebar  />
       </div>
       <div className="p-4">
         <Outlet />

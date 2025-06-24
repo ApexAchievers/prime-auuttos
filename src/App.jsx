@@ -9,6 +9,7 @@ import ViewProduct from "./pages/ViewProduct";
 import VendorDashboard from "./pages/VendorDashboard";
 import CartTest from "./pages/CartTestPage";
 import CartProvider from "./context/CartContext";
+import NotFound from "./pages/NotFound";
 
 import BatteryElectricity from "./pages/BatteryElectricity";
 import BikeAccessories from "./pages/BikeAccessories";
@@ -50,6 +51,8 @@ const primeAuttosRouter = createBrowserRouter([
       { path: "/services", element: <Services /> },
       { path: "/suspension-steering", element: <SuspensionSteering /> },
       { path: "/transmission-drivetrain", element: <TransmissionDrivetrain /> },
+      { path: "/cart-test", element: <CartTest /> },
+      { path: "*", element: <NotFound /> },
 
     ]
   }
@@ -57,7 +60,7 @@ const primeAuttosRouter = createBrowserRouter([
 
 function App() {
   return (
-    <CartProvider> 
+    <CartProvider>
       <RouterProvider router={primeAuttosRouter} />
     </CartProvider>
   );
