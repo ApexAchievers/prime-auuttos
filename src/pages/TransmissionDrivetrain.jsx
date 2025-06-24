@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import SimilarProducts from "../components/SimilarProduct";
-import { Grid, List } from "lucide-react";
+
 import Footer from "../components/Footer";
 
 export default function ViewProduct() {
-    const [viewMode, setViewMode] = useState('grid');
+    const viewMode = 'list';
     const [page, setPage] = useState(1);
-    const totalPages = 5; // Set this to your actual total pages
+    const totalPages = 5; 
 
     const handlePrev = () => setPage((p) => Math.max(1, p - 1));
     const handleNext = () => setPage((p) => Math.min(totalPages, p + 1));
@@ -15,24 +15,11 @@ export default function ViewProduct() {
         <>
             <div className="min-h-screen bg-white">
                 <div className="max-w-5xl mx-auto px-3 mt-8">
-                    <div className="flex justify-end">
-                        <div className="flex items-center space-x-2">
-                            <button
-                                onClick={() => setViewMode('grid')}
-                                className={`p-2 rounded-lg ${viewMode === 'grid' ? 'bg-orange-100 text-orange-700' : 'text-gray-400 hover:text-gray-600'}`}
-                                aria-label="Grid view"
-                            >
-                                <Grid className="h-5 w-5" />
-                            </button>
-                            <button
-                                onClick={() => setViewMode('list')}
-                                className={`p-2 rounded-lg ${viewMode === 'list' ? 'bg-orange-100 text-orange-700' : 'text-gray-400 hover:text-gray-600'}`}
-                                aria-label="List view"
-                            >
-                                <List className="h-5 w-5" />
-                            </button>
-                        </div>
-                    </div>
+                    <h1 className="text-2xl md:text-3xl text-gray-900 font-bold mb-2 text-left">
+                    Transmission & Drivetrain
+                </h1>
+                <hr className="border-t-1 border-gray-700 w-full mb-4" />
+
                 </div>
                 <SimilarProducts viewMode={viewMode} />
                 {/* Pagination buttons */}
