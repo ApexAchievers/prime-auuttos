@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import { Upload, File } from 'lucide-react';
+import Navbar from '../components/Navbar';      
+import Footer from '../components/Footer';
+
 
 export default function PostAdvert() {
     const [formData, setFormData] = useState({
@@ -43,13 +46,14 @@ export default function PostAdvert() {
         // Handle form submission logic here
     };
 
-    const handleCancel = () => {
-        console.log('Form cancelled');
-        // Handle cancel logic here
-    };
+  
 
     return (
-        <div className="min-h-screen bg-gray-50 p-6">
+
+        <>
+        
+
+        <div className="min-h-screen bg-gray-100 p-4">
             <div className="max-w-2xl mx-auto">
                 {/* Header */}
                 <div className="mb-8">
@@ -202,8 +206,8 @@ export default function PostAdvert() {
                         {/* Product Image Upload */}
                         <div className="flex flex-col">
                             <div className="flex items-center gap-2 mb-2">
-                                <Upload className="w-4 h-4 text-blue-500" />
-                                <label className="text-sm font-medium text-blue-600">Product Image</label>
+                                <Upload className="w-4 h-4 text-black" />
+                                <label className="text-sm font-medium text-black">Product Image</label>
                             </div>
                             <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 flex flex-col items-center text-center">
                                 <div className="text-blue-600 mb-2">
@@ -224,14 +228,14 @@ export default function PostAdvert() {
                         <div className="flex flex-col sm:flex-row justify-end gap-4 pt-6">
                             <button
                                 type="button"
-                                onClick={handleCancel}
+                              
                                 className="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 font-medium transition-colors flex items-center justify-center"
                             >
                                 Cancel
                             </button>
                             <button
                                 type="submit"
-                                className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium transition-colors flex items-center justify-center gap-2"
+                                className="px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-400 font-medium transition-colors flex items-center justify-center gap-2"
                             >
                                 <Upload className="w-4 h-4" />
                                 Post Advert
@@ -241,6 +245,10 @@ export default function PostAdvert() {
                 </form>
             </div>
         </div>
+
+        <Footer />
+        </>
+
 
 
     );

@@ -1,26 +1,25 @@
 import { useState } from 'react';
 import { Plus, Edit, Trash2, Eye, ToggleLeft, ToggleRight, ChevronLeft, ChevronRight, LogOut, User, X, Settings, Search, Filter } from 'lucide-react';
 import { Link } from 'react-router';
+import PostAdvert from './AddProduct';
+import Footer from '../components/Footer';
 
 export default function VendorDashboard() {
     const [currentPage, setCurrentPage] = useState(1);
     const [showProfileModal, setShowProfileModal] = useState(false);
+
     const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
     const [showFilters, setShowFilters] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
-    const [filters, setFilters] = useState({
-        category: '',
-        status: '',
-        brand: '',
-
-    });
+    const [filters, setFilters] = useState({ category: '', status: '', brand: '' });
     const [profileData, setProfileData] = useState({
-        name: 'Kojo oppong',
+        name: 'Kojo Oppong',
         email: 'princedarf1@gmail.com',
         phone: '+233 24 123 4567',
         company: 'Auto Parts Ghana',
         address: 'Accra, Ghana'
     });
+
     const itemsPerPage = 10;
 
     const advert = [
@@ -146,7 +145,7 @@ export default function VendorDashboard() {
         },
     ];
 
-    // Get unique values for filter options
+    // Get unique values for filter Monastero Maggiorefilter options
     const categories = [...new Set(advert.map(ad => ad.category))];
     const brands = [...new Set(advert.map(ad => ad.brand))];
     const statuses = [...new Set(advert.map(ad => ad.status))];
@@ -178,7 +177,7 @@ export default function VendorDashboard() {
             ...prev,
             [filterType]: value
         }));
-        setCurrentPage(1); // Reset to first page when filtering
+        setCurrentPage(1);
     };
 
     const clearFilters = () => {
@@ -192,17 +191,13 @@ export default function VendorDashboard() {
     };
 
     const handleProfileUpdate = () => {
-        // Here you would typically make an API call to update the profile
         console.log('Profile updated:', profileData);
         setShowProfileModal(false);
-        // Show success message or toast
     };
 
     const handleLogout = () => {
-        // Here you would typically clear session/tokens and redirect
         console.log('Logging out...');
         setShowLogoutConfirm(false);
-        // Redirect to login page
     };
 
     const handleInputChange = (field, value) => {
@@ -215,32 +210,32 @@ export default function VendorDashboard() {
     const renderAdverts = () => {
         return currentAdverts.map((ad) => (
             <tr key={ad.id} className="border-b border-gray-100 hover:bg-gray-50 transition-colors duration-150">
-                <td className="py-1.5 px-3">
+                <td className="py-2 px-4 sm:px-3">
                     <div className="flex items-center gap-2">
                         <img
                             src={ad.image}
                             alt={ad.title}
                             className="w-8 h-8 rounded object-cover flex-shrink-0"
                         />
-                        <span className="text-xs font-medium text-gray-900">{ad.title}</span>
+                        <span className="text-xs sm:text-sm font-medium text-gray-900">{ad.title}</span>
                     </div>
                 </td>
-                <td className="py-1.5 px-3 text-xs font-semibold text-gray-900">{ad.price}</td>
-                <td className="py-1.5 px-3 text-xs text-gray-600">{ad.category}</td>
-                <td className="py-1.5 px-3 text-xs text-gray-600">{ad.brand}</td>
-                <td className="py-1.5 px-3">
-                    <span className={`inline-flex px-2 py-0.5 text-xs font-medium rounded-full ${ad.status === 'Available'
+                <td className="py-2 px-4 sm:px-3 text-xs sm:text-sm font-semibold text-gray-900">{ad.price}</td>
+                <td className="py-2 px-4 sm:px-3 text-xs sm:text-sm text-gray-600 hidden sm:table-cell">{ad.category}</td>
+                <td className="py-2 px-4 sm:px-3 text-xs sm:text-sm text-gray-600 hidden sm:table-cell">{ad.brand}</td>
+                <td className="py-2 px-4 sm:px-3">
+                    <span className={`inline-flex px-2 py-0.5 text-xs sm:text-sm font-medium rounded-full ${ad.status === 'Available'
                         ? 'bg-green-100 text-green-800'
                         : 'bg-red-100 text-red-800'
                         }`}>
                         {ad.status}
                     </span>
                 </td>
-                <td className="py-1.5 px-3 text-xs text-gray-600">
+                <td className="py-2 px-4 sm:px-3 text-xs sm:text-sm text-gray-600 hidden md:table-cell">
                     {new Date(ad.created).toDateString()}
                 </td>
-                <td className="py-1.5 px-3">
-                    <div className="flex gap-1">
+                <td className="py-2 px-4 sm:px-3">
+                    <div className="flex gap-1 justify-center">
                         <Link to="/view-product">
                             <button
                                 className="w-6 h-6 flex items-center justify-center rounded bg-blue-50 text-blue-600 hover:bg-blue-100 hover:scale-110 transition-all duration-200"
@@ -272,33 +267,34 @@ export default function VendorDashboard() {
     };
 
     return (
+
         <>
 
-            <div className="p-6 bg-white min-h-screen">
+            <div className="p-4 sm:p-6 bg-white min-h-screen">
                 {/* Header with Profile and Logout */}
-                <div className="flex justify-between items-start mb-6">
+                <div className="flex flex-col sm:flex-row justify-between items-start mb-6 gap-4">
                     <div>
-                        <h1 className="text-3xl font-bold text-gray-900">Vendor Dashboard</h1>
-                        <p className="text-gray-800 mt-1">
+                        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Vendor Dashboard</h1>
+                        <p className="text-gray-800 mt-1 text-sm sm:text-base">
                             Welcome back, <span className="text-blue-500">{profileData.name}</span>
                         </p>
                     </div>
-                    <div className="flex items-center gap-3">
+                    <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
                         <button
                             onClick={() => setShowProfileModal(true)}
-                            className="flex items-center gap-2 bg-black hover:bg-gray-400 text-white font-medium px-4 py-2 rounded-lg transition-colors cursor-pointer"
+                            className="flex items-center gap-2 bg-black hover:bg-gray-700 text-white font-medium px-4 py-2 rounded-lg transition-colors w-full sm:w-auto"
                         >
                             <Settings size={16} />
                             Profile
                         </button>
+
                         <Link to="/add-product">
-                            <button className="bg-black hover:bg-gray-400 text-white font-medium px-5 py-2 rounded-lg cursor-pointer">
-                                + Post New Advert
-                            </button>
+                            <button className="bg-black hover:bg-gray-700 text-white font-medium px-4 sm:px-5 py-2 rounded-lg w-full sm:w-auto"> + Post New Advert</button>
                         </Link>
+
                         <button
                             onClick={() => setShowLogoutConfirm(true)}
-                            className="flex items-center gap-2 bg-red-100 hover:bg-red-200 text-red-700 font-medium px-4 py-2 rounded-lg transition-colors cursor-pointer"
+                            className="flex items-center gap-2 bg-red-100 hover:bg-red-200 text-red-700 font-medium px-4 py-2 rounded-lg transition-colors w-full sm:w-auto"
                         >
                             <LogOut size={16} />
                             Logout
@@ -307,30 +303,29 @@ export default function VendorDashboard() {
                 </div>
 
                 {/* Stats */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-                    <div className="bg-white p-6 rounded-lg shadow">
-                        <p className="text-gray-700 font-semibold mb-2">Total Adverts</p>
-                        <p className="text-blue-600 text-4xl font-bold">{advert.length}</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+                    <div className="bg-white p-4 sm:p-6 rounded-lg shadow">
+                        <p className="text-gray-700 font-semibold mb-2 text-sm sm:text-base">Total Adverts</p>
+                        <p className="text-orange-700 text-3xl sm:text-4xl font-bold">{advert.length}</p>
                     </div>
-                    <div className="bg-white p-6 rounded-lg shadow">
-                        <p className="text-gray-700 font-semibold mb-2">Active Adverts</p>
-                        <p className="text-green-600 text-4xl font-bold">
+                    <div className="bg-white p-4 sm:p-6 rounded-lg shadow">
+                        <p className="text-gray-700 font-semibold mb-2 text-sm sm:text-base">Active Adverts</p>
+                        <p className="text-green-600 text-3xl sm:text-4xl font-bold">
                             {advert.filter((ad) => ad.status === 'Available').length}
                         </p>
                     </div>
-                    <div className="bg-white p-6 rounded-lg shadow">
-                        <p className="text-gray-700 font-semibold mb-2">Inactive Adverts</p>
-                        <p className="text-gray-600 text-4xl font-bold">
+                    <div className="bg-white p-4 sm:p-6 rounded-lg shadow">
+                        <p className="text-gray-700 font-semibold mb-2 text-sm sm:text-base">Inactive Adverts</p>
+                        <p className="text-gray-600 text-3xl sm:text-4xl font-bold">
                             {advert.filter((ad) => ad.status !== 'Available').length}
                         </p>
                     </div>
                 </div>
 
                 {/* Search and Filter Section */}
-                <div className="bg-white rounded-lg shadow mb-6 p-4">
+                <div className="bg-white rounded-lg shadow mb-6 p-4 sm:p-5">
                     <div className="flex flex-col sm:flex-row gap-4 items-center">
-                        {/* Search Bar */}
-                        <div className="relative flex-1">
+                        <div className="relative flex-1 w-full">
                             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
                             <input
                                 type="text"
@@ -340,14 +335,12 @@ export default function VendorDashboard() {
                                     setSearchTerm(e.target.value);
                                     setCurrentPage(1);
                                 }}
-                                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
                             />
                         </div>
-
-                        {/* Filter Toggle Button */}
                         <button
                             onClick={() => setShowFilters(!showFilters)}
-                            className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-colors ${showFilters ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                            className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-colors text-sm sm:text-base ${showFilters ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                                 }`}
                         >
                             <Filter size={16} />
@@ -360,17 +353,15 @@ export default function VendorDashboard() {
                         </button>
                     </div>
 
-                    {/* Filter Controls */}
                     {showFilters && (
                         <div className="mt-4 pt-4 border-t border-gray-200">
-                            <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4 items-end">
-                                {/* Category Filter */}
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
                                     <select
                                         value={filters.category}
                                         onChange={(e) => handleFilterChange('category', e.target.value)}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
                                     >
                                         <option value="">All Categories</option>
                                         {categories.map(category => (
@@ -378,14 +369,12 @@ export default function VendorDashboard() {
                                         ))}
                                     </select>
                                 </div>
-
-                                {/* Brand Filter */}
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700 mb-1">Brand</label>
                                     <select
                                         value={filters.brand}
                                         onChange={(e) => handleFilterChange('brand', e.target.value)}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
                                     >
                                         <option value="">All Brands</option>
                                         {brands.map(brand => (
@@ -393,14 +382,12 @@ export default function VendorDashboard() {
                                         ))}
                                     </select>
                                 </div>
-
-                                {/* Status Filter */}
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
                                     <select
                                         value={filters.status}
                                         onChange={(e) => handleFilterChange('status', e.target.value)}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
                                     >
                                         <option value="">All Statuses</option>
                                         {statuses.map(status => (
@@ -408,12 +395,10 @@ export default function VendorDashboard() {
                                         ))}
                                     </select>
                                 </div>
-
-                                {/* Clear Filters Button */}
                                 <div>
                                     <button
                                         onClick={clearFilters}
-                                        className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium px-4 py-2 rounded-md transition-colors"
+                                        className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium px-4 py-2 rounded-md transition-colors text-sm sm:text-base"
                                     >
                                         Clear All
                                     </button>
@@ -422,11 +407,10 @@ export default function VendorDashboard() {
                         </div>
                     )}
 
-                    {/* Active Filters Display */}
                     {(filters.category || filters.status || filters.brand || searchTerm) && (
                         <div className="mt-3 flex flex-wrap gap-2">
                             {searchTerm && (
-                                <span className="inline-flex items-center gap-1 bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">
+                                <span className="inline-flex items-center gap-1 bg-blue-100 text-blue-800 text-xs sm:text-sm px-3 py-1 rounded-full">
                                     Search: "{searchTerm}"
                                     <button onClick={() => { setSearchTerm(''); setCurrentPage(1); }}>
                                         <X size={14} />
@@ -434,7 +418,7 @@ export default function VendorDashboard() {
                                 </span>
                             )}
                             {filters.category && (
-                                <span className="inline-flex items-center gap-1 bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">
+                                <span className="inline-flex items-center gap-1 bg-green-100 text-green-800 text-xs sm:text-sm px-3 py-1 rounded-full">
                                     Category: {filters.category}
                                     <button onClick={() => handleFilterChange('category', '')}>
                                         <X size={14} />
@@ -442,7 +426,7 @@ export default function VendorDashboard() {
                                 </span>
                             )}
                             {filters.brand && (
-                                <span className="inline-flex items-center gap-1 bg-purple-100 text-purple-800 text-sm px-3 py-1 rounded-full">
+                                <span className="inline-flex items-center gap-1 bg-purple-100 text-purple-800 text-xs sm:text-sm px-3 py-1 rounded-full">
                                     Brand: {filters.brand}
                                     <button onClick={() => handleFilterChange('brand', '')}>
                                         <X size={14} />
@@ -450,7 +434,7 @@ export default function VendorDashboard() {
                                 </span>
                             )}
                             {filters.status && (
-                                <span className="inline-flex items-center gap-1 bg-orange-100 text-orange-800 text-sm px-3 py-1 rounded-full">
+                                <span className="inline-flex items-center gap-1 bg-orange-100 text-orange-800 text-xs sm:text-sm px-3 py-1 rounded-full">
                                     Status: {filters.status}
                                     <button onClick={() => handleFilterChange('status', '')}>
                                         <X size={14} />
@@ -461,79 +445,75 @@ export default function VendorDashboard() {
                     )}
                 </div>
 
-                {/* Results Summary */}
                 {filteredAdverts.length !== advert.length && (
                     <div className="mb-4">
-                        <p className="text-gray-600">
+                        <p className="text-gray-600 text-sm sm:text-base">
                             Showing {filteredAdverts.length} of {advert.length} adverts
                             {searchTerm && ` for "${searchTerm}"`}
                         </p>
                     </div>
                 )}
 
-                {/* Empty State - Show when no adverts or no filtered results */}
                 {advert.length === 0 && (
-                    <div className="bg-gray-100 opacity-80 rounded-lg shadow p-10 text-center">
-                        <h2 className="text-xl font-semibold mb-2">Your Adverts</h2>
-                        <div className="text-gray-400 text-5xl mb-4">+</div>
-                        <p className="text-gray-700 font-medium mb-1">No adverts yet</p>
-                        <p className="mb-4">Post your first Ad, your Customers waiting!!</p>
+                    <div className="bg-gray-100 opacity-80 rounded-lg shadow p-6 sm:p-10 text-center">
+                        <h2 className="text-lg sm:text-xl font-semibold mb-2">Your Adverts</h2>
+                        <div className="text-gray-400 text-4xl sm:text-5xl mb-4">+</div>
+                        <p className="text-gray-700 font-medium mb-1 text-sm sm:text-base">No adverts yet</p>
+                        <p className="mb-4 text-sm sm:text-base">Post your first Ad, your Customers are waiting!</p>
+                        <button
 
-                        <Link to='/add-product'>
-                            <button className="bg-black hover:bg-gray-400 text-white font-medium px-6 py-2 rounded-lg">
-                                + Post Your First Advert
-                            </button>
-                        </Link>
+                            className="bg-black hover:bg-gray-700 text-white font-medium px-4 sm:px-6 py-2 rounded-lg"
+                        >
+                            + Post Your First Advert
+                        </button>
                     </div>
                 )}
 
-                {/* No Results State */}
                 {advert.length > 0 && filteredAdverts.length === 0 && (
-                    <div className="bg-white rounded-lg shadow p-10 text-center">
-                        <div className="text-gray-400 text-5xl mb-4">🔍</div>
-                        <h2 className="text-xl font-semibold mb-2">No Results Found</h2>
-                        <p className="text-gray-600 mb-4">
+                    <div className="bg-white rounded-lg shadow p-6 sm:p-10 text-center">
+                        <div className="text-gray-400 text-4xl sm:text-5xl mb-4">🔍</div>
+                        <h2 className="text-lg sm:text-xl font-semibold mb-2">No Results Found</h2>
+                        <p className="text-gray-600 mb-4 text-sm sm:text-base">
                             No adverts match your current search and filter criteria.
                         </p>
                         <button
                             onClick={clearFilters}
-                            className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-2 rounded-lg"
+                            className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 sm:px-6 py-2 rounded-lg"
                         >
                             Clear Filters
                         </button>
                     </div>
                 )}
 
-                {/* Posts Table - Only show when there are filtered adverts */}
                 {filteredAdverts.length > 0 && (
                     <div className="bg-white rounded-xl shadow-lg overflow-hidden">
                         <div className="p-4 border-b border-gray-200">
-                            <h2 className="text-xl font-semibold text-gray-900">Your Posts</h2>
+                            <h2 className="text-lg sm:text-xl font-semibold text-gray-900">Your Posts</h2>
                         </div>
 
                         <div className="overflow-x-auto">
-                            <table className="w-full">
+                            <table className="w-full table-auto">
                                 <thead className="bg-gray-50">
                                     <tr>
-                                        <th className="py-2 px-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                                        <th className="py-2 px-4 text-left text-xs sm:text-sm font-semibold text-gray-500 uppercase tracking-wider">
                                             Product
                                         </th>
-                                        <th className="py-2 px-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                                        <th className="py-2 px-4 text-left text-xs sm:text-sm font-semibold text-gray-500 uppercase tracking-wider">
                                             Price
                                         </th>
-                                        <th className="py-2 px-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                                        <th className="py-2 px-4 text-left text-xs sm:text-sm font-semibold text-gray-500 uppercase tracking-wider hidden sm:table-cell">
                                             Category
                                         </th>
-                                        <th className="py-2 px-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                                        <th className="py-2 px-4 text-left text-xs sm:text-sm font-semibold text-gray-500 uppercase tracking-wider hidden sm:table-cell">
                                             Brand
                                         </th>
-                                        <th className="py-2 px-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                                        <th className="py-2 px-4 text-left text-xs sm:text-sm font-semibold text-gray-500 uppercase tracking-wider">
                                             Status
                                         </th>
-                                        <th className="py-2 px-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                                        <th className="py-2 px-4 text-left text-xs sm:text-sm font-semibold text-gray-500 uppercase tracking-wider hidden md:table-cell">
                                             Created
                                         </th>
-                                        <th className="py-2 px-3 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                                        <th className="py-2 px-4 text-center text-xs sm:text-sm font-semibold text-gray-500 uppercase tracking-wider">
                                             Actions
                                         </th>
                                     </tr>
@@ -544,9 +524,8 @@ export default function VendorDashboard() {
                             </table>
                         </div>
 
-                        {/* Pagination */}
                         {totalPages > 1 && (
-                            <div className="px-4 py-3 bg-gray-50 border-t border-gray-200 flex items-center justify-between">
+                            <div className="px-4 py-3 bg-gray-50 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
                                 <span className="text-sm text-gray-600">
                                     Showing {startIndex + 1}-{Math.min(startIndex + itemsPerPage, filteredAdverts.length)} of {filteredAdverts.length} items
                                 </span>
@@ -585,18 +564,21 @@ export default function VendorDashboard() {
                     </div>
                 )}
 
-                {/* Profile Edit Modal */}
+                {/* {showAddProductModal && (
+                <PostAdvert />
+            )} */}
+
                 {showProfileModal && (
                     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-                        <div className="bg-white rounded-lg w-full max-w-md max-h-[90vh] overflow-y-auto">
-                            <div className="p-6">
-                                <div className="flex justify-between items-center mb-6">
-                                    <h2 className="text-2xl font-bold text-gray-900">Edit Profile</h2>
+                        <div className="bg-white rounded-lg w-full max-w-md sm:max-w-lg max-h-[90vh] overflow-y-auto">
+                            <div className="p-4 sm:p-6">
+                                <div className="flex justify-between items-center mb-4 sm:mb-6">
+                                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Edit Profile</h2>
                                     <button
                                         onClick={() => setShowProfileModal(false)}
                                         className="text-gray-400 hover:text-gray-600 transition-colors"
                                     >
-                                        <X size={24} />
+                                        <X size={20} />
                                     </button>
                                 </div>
 
@@ -609,7 +591,7 @@ export default function VendorDashboard() {
                                             type="text"
                                             value={profileData.name}
                                             onChange={(e) => handleInputChange('name', e.target.value)}
-                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
                                             required
                                         />
                                     </div>
@@ -622,7 +604,7 @@ export default function VendorDashboard() {
                                             type="email"
                                             value={profileData.email}
                                             onChange={(e) => handleInputChange('email', e.target.value)}
-                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
                                             required
                                         />
                                     </div>
@@ -635,7 +617,7 @@ export default function VendorDashboard() {
                                             type="tel"
                                             value={profileData.phone}
                                             onChange={(e) => handleInputChange('phone', e.target.value)}
-                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
                                             required
                                         />
                                     </div>
@@ -646,9 +628,9 @@ export default function VendorDashboard() {
                                         </label>
                                         <input
                                             type="text"
-                                            value={profileData.businessName}
-                                            onChange={(e) => handleInputChange('businessName', e.target.value)}
-                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            value={profileData.company}
+                                            onChange={(e) => handleInputChange('company', e.target.value)}
+                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
                                             required
                                         />
                                     </div>
@@ -661,21 +643,21 @@ export default function VendorDashboard() {
                                             value={profileData.address}
                                             onChange={(e) => handleInputChange('address', e.target.value)}
                                             rows={3}
-                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
                                             required
                                         />
                                     </div>
 
-                                    <div className="flex gap-3 pt-4">
+                                    <div className="flex flex-col sm:flex-row gap-3 pt-4">
                                         <button
                                             onClick={handleProfileUpdate}
-                                            className="flex-1 bg-black hover:bg-gray-400 text-white font-medium py-2 px-4 rounded-md transition-colors"
+                                            className="flex-1 bg-black hover:bg-gray-700 text-white font-medium py-2 px-4 rounded-md transition-colors text-sm sm:text-base"
                                         >
                                             Save Changes
                                         </button>
                                         <button
-                                            onClick={() => setShowProfileModal()}
-                                            className="flex-1 bg-black hover:bg-gray-400 text-white font-medium py-2 px-4 rounded-md transition-colors"
+                                            onClick={() => setShowProfileModal(false)}
+                                            className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 font-medium py-2 px-4 rounded-md transition-colors text-sm sm:text-base"
                                         >
                                             Cancel
                                         </button>
@@ -686,30 +668,29 @@ export default function VendorDashboard() {
                     </div>
                 )}
 
-                {/* Logout Confirmation Modal */}
                 {showLogoutConfirm && (
                     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
                         <div className="bg-white rounded-lg w-full max-w-sm">
-                            <div className="p-6">
+                            <div className="p-4 sm:p-6">
                                 <div className="flex items-center justify-center w-12 h-12 mx-auto mb-4 bg-red-100 rounded-full">
                                     <LogOut className="w-6 h-6 text-red-600" />
                                 </div>
-                                <h2 className="text-xl font-bold text-gray-900 text-center mb-2">
+                                <h2 className="text-lg sm:text-xl font-bold text-gray-900 text-center mb-2">
                                     Confirm Logout
                                 </h2>
-                                <p className="text-gray-600 text-center mb-6">
+                                <p className="text-gray-600 text-center mb-4 sm:mb-6 text-sm sm:text-base">
                                     Are you sure you want to logout? You'll need to sign in again to access your dashboard.
                                 </p>
-                                <div className="flex gap-3">
+                                <div className="flex flex-col sm:flex-row gap-3">
                                     <button
                                         onClick={handleLogout}
-                                        className="flex-1 bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-md transition-colors"
+                                        className="flex-1 bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-md transition-colors text-sm sm:text-base"
                                     >
                                         Yes, Logout
                                     </button>
                                     <button
                                         onClick={() => setShowLogoutConfirm(false)}
-                                        className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 font-medium py-2 px-4 rounded-md transition-colors"
+                                        className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 font-medium py-2 px-4 rounded-md transition-colors text-sm sm:text-base"
                                     >
                                         Cancel
                                     </button>
@@ -719,6 +700,10 @@ export default function VendorDashboard() {
                     </div>
                 )}
             </div>
+
+
         </>
+
+
     );
 }
