@@ -61,69 +61,82 @@ const featuredProducts = [
     id: 1,
     name: 'Body & Exterior',
     image: pc1,
+    link: '/body-exterior',
   },
   {
     id: 2,
     name: 'Interior Components',
     image: pc7,
+    link: '/interior-component',
   },
   {
     id: 3,
     name: 'Bike Parts & Accessories',
     image: pc3,
+    link: '/bike-accessories',
   },
   {
     id: 4,
     name: 'Suspension & Steering',
     image: pc4,
+    link: '/suspension-steering',
   },
   // Row 2 - 2 items
   {
     id: 5,
     name: 'Braking System',
     image: pc5,
+    link: '/breaking-system',
   },
   {
     id: 6,
     name: 'Fluid and Lubricants',
     image: pc6,
+    link: '/fluid-lubricants',
   },
   // Row 3 - 4 items
   {
     id: 7,
     name: 'Cycling Essentials',
     image: pc2,
+    link: '/cycling-essentials',
   },
   {
     id: 8,
     name: 'Services',
     image: pc8,
+    link: '/services',
   },
   {
     id: 9,
     name: 'Climate & Comfort',
     image: pc9,
+    link: '/climate-comfort',
   },
   {
     id: 10,
     name: 'Electrical & Battery System',
     image: pc10,
+    link: '/battery-electricity',
   },
   // Row 4 - 3 items
   {
     id: 11,
     name: 'Lights & Indicators',
     image: pc11,
+    link: '/light-indicators',
   },
   {
     id: 12,
     name: 'Transmission & Drivetrain',
     image: pc12,
+    link: '/transmission-drivetrain',
   },
   {
     id: 13,
     name: 'Engine & Mechanical Components',
     image: pc13,
+    link: '/engine-mechanical',
   }
 ];
 
@@ -224,93 +237,85 @@ export default function Home() {
                 {/* Row 1 - 4 items */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-x-2">
                   {row1.map((product) => (
-                    <div
-                      key={product.id}
-                      className="bg-white shadow-2xl transition-shadow group cursor-pointer overflow-hidden p-4"
-                    >
-                      <div className="relative">
-                        <div className="mt-2 text-center">
-                          <h3 className="text-orange-700 font-semibold hover:font-bold text-base md:text-lg">{product.name}</h3>
-                          <p className="text-gray-600 text-sm">{product.description || 'Explore this category'}</p>
-                        </div>
-                        <img
-                          src={product.image}
-                          alt={product.name}
-                          className="w-full h-48 md:h-56 object-contain group-hover:scale-105 transition-transform duration-300 mx-auto"
-                        />
-
-                      </div>
-                    </div>
-                  ))}
+  <Link to={product.link} key={product.id}>
+    <div className="bg-white shadow-2xl transition-shadow group cursor-pointer overflow-hidden p-4">
+      <div className="relative">
+        <div className="mt-2 text-center">
+          <h3 className="text-orange-700 font-semibold hover:font-bold text-base md:text-lg">{product.name}</h3>
+          <p className="text-gray-600 text-sm">{product.description || 'Explore this category'}</p>
+        </div>
+        <img
+          src={product.image}
+          alt={product.name}
+          className="w-full h-48 md:h-56 object-contain group-hover:scale-105 transition-transform duration-300 mx-auto"
+        />
+      </div>
+    </div>
+  </Link>
+))}
                 </div>
 
                 {/* Row 2 - 2 items */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-2">
                   {row2.map((product) => (
-                    <div
-                      key={product.id}
-                      className="bg-white shadow-2xl transition-shadow group cursor-pointer overflow-hidden p-4"
-                    >
-                      <div className="relative">
-                        <div className="mt-2 text-center">
-                          <h3 className="text-orange-700 font-semibold hover:font-bold text-base md:text-lg">{product.name}</h3>
-                          <p className="text-gray-600 text-sm">{product.description || 'Explore this category'}</p>
-                        </div>
-                        <img
-                          src={product.image}
-                          alt={product.name}
-                          className="w-full h-48 md:h-64 object-contain group-hover:scale-105 transition-transform duration-300 mx-auto"
-                        />
-
-                      </div>
-                    </div>
-                  ))}
+  <Link to={product.link} key={product.id}>
+    <div className="bg-white shadow-2xl transition-shadow group cursor-pointer overflow-hidden p-4">
+      <div className="relative">
+        <div className="mt-2 text-center">
+          <h3 className="text-orange-700 font-semibold hover:font-bold text-base md:text-lg">{product.name}</h3>
+          <p className="text-gray-600 text-sm">{product.description || 'Explore this category'}</p>
+        </div>
+        <img
+          src={product.image}
+          alt={product.name}
+          className="w-full h-48 md:h-56 object-contain group-hover:scale-105 transition-transform duration-300 mx-auto"
+        />
+      </div>
+    </div>
+  </Link>
+))}
                 </div>
 
                 {/* Row 3 - 4 items */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-x-2">
                   {row3.map((product) => (
-                    <div
-                      key={product.id}
-                      className="bg-white shadow-2xl hover:shadow-xl transition-shadow group cursor-pointer overflow-hidden p-4"
-                    >
-                      <div className="relative">
-                        <div className="mt-2 text-center">
-                          <h3 className="text-orange-700 font-semibold hover:font-bold text-base md:text-lg">{product.name}</h3>
-                          <p className="text-gray-600 text-sm">{product.description || 'Explore this category'}</p>
-                        </div>
-                        <img
-                          src={product.image}
-                          alt={product.name}
-                          className="w-full h-48 md:h-56 object-contain group-hover:scale-105 transition-transform duration-300 mx-auto"
-                        />
-
-                      </div>
-                    </div>
-                  ))}
+  <Link to={product.link} key={product.id}>
+    <div className="bg-white shadow-2xl transition-shadow group cursor-pointer overflow-hidden p-4">
+      <div className="relative">
+        <div className="mt-2 text-center">
+          <h3 className="text-orange-700 font-semibold hover:font-bold text-base md:text-lg">{product.name}</h3>
+          <p className="text-gray-600 text-sm">{product.description || 'Explore this category'}</p>
+        </div>
+        <img
+          src={product.image}
+          alt={product.name}
+          className="w-full h-48 md:h-56 object-contain group-hover:scale-105 transition-transform duration-300 mx-auto"
+        />
+      </div>
+    </div>
+  </Link>
+))}
                 </div>
 
                 {/* Row 4 - 3 items */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-x-2">
                   {row4.map((product) => (
-                    <div
-                      key={product.id}
-                      className="bg-white shadow-2xl hover:shadow-xl transition-shadow group cursor-pointer overflow-hidden p-4"
-                    >
-                      <div className="relative">
-                        <div className="mt-2 text-center">
-                          <h3 className="text-orange-700 font-semibold hover:font-bold text-base md:text-lg">{product.name}</h3>
-                          <p className="text-gray-600 text-sm">{product.description || 'Explore this category'}</p>
-                        </div>
-                        <img
-                          src={product.image}
-                          alt={product.name}
-                          className="w-full h-48 md:h-60 object-contain group-hover:scale-105 transition-transform duration-300 mx-auto"
-                        />
-
-                      </div>
-                    </div>
-                  ))}
+  <Link to={product.link} key={product.id}>
+    <div className="bg-white shadow-2xl transition-shadow group cursor-pointer overflow-hidden p-4">
+      <div className="relative">
+        <div className="mt-2 text-center">
+          <h3 className="text-orange-700 font-semibold hover:font-bold text-base md:text-lg">{product.name}</h3>
+          <p className="text-gray-600 text-sm">{product.description || 'Explore this category'}</p>
+        </div>
+        <img
+          src={product.image}
+          alt={product.name}
+          className="w-full h-48 md:h-56 object-contain group-hover:scale-105 transition-transform duration-300 mx-auto"
+        />
+      </div>
+    </div>
+  </Link>
+))}
                 </div>
               </div>
               <Link to="/view-product">

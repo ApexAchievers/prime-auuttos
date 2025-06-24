@@ -7,6 +7,19 @@ import AddProduct from "./pages/AddProduct";
 import EditProduct from "./pages/EditProduct";
 import ViewProduct from "./pages/ViewProduct";
 import VendorDashboard from "./pages/VendorDashboard";
+import BatteryElectricity from "./pages/BatteryElectricity";
+import BikeAccessories from "./pages/BikeAccessories";
+import BodyExterior from "./pages/BodyExterior";
+import BreakingSystem from "./pages/BreakingSystem";
+import ClimateComfort from "./pages/ClimateComfort";
+import CyclingEssentials from "./pages/CyclingEssentials";
+import EngineMechanical from "./pages/EngineMechanical";
+import FluidLubricants from "./pages/FluidLubricants";
+import InteriorComponent from "./pages/InteriorComponent";
+import LightIndicators from "./pages/LightIndicators";
+import Services from "./pages/Services";
+import SuspensionSteering from "./pages/SuspensionSteering";
+import TransmissionDrivetrain from "./pages/TransmissionDrivetrain";
 
 const primeAuttosRouter = createBrowserRouter([
 
@@ -21,6 +34,19 @@ const primeAuttosRouter = createBrowserRouter([
       { path: "/edit-product", element: <EditProduct /> },
       { path: "/view-product", element: <ViewProduct /> },
       { path: "/vendor-dashboard", element: <VendorDashboard /> },
+      { path: "/battery-electricity", element: <BatteryElectricity /> },
+      { path: "/bike-accessories", element: <BikeAccessories /> },
+      { path: "/body-exterior", element: <BodyExterior /> },
+      { path: "/breaking-system", element: <BreakingSystem /> },
+      { path: "/climate-comfort", element: <ClimateComfort /> },
+      { path: "/cycling-essentials", element: <CyclingEssentials /> },
+      { path: "/engine-mechanical", element: <EngineMechanical /> },
+      { path: "/fluid-lubricants", element: <FluidLubricants /> },
+      { path: "/interior-component", element: <InteriorComponent /> },
+      { path: "/light-indicators", element: <LightIndicators /> },
+      { path: "/services", element: <Services /> },
+      { path: "/suspension-steering", element: <SuspensionSteering /> },
+      { path: "/transmission-drivetrain", element: <TransmissionDrivetrain /> },
 
     ]
   }
