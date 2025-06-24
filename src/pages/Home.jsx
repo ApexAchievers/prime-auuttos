@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { Pause, Play } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import tyres from '../assets/images/tyres.JPG';
@@ -143,8 +144,10 @@ const featuredProducts = [
 export default function Home() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isFading, setIsFading] = useState(false);
+  const [paused, setPaused] = useState(false); 
 
   useEffect(() => {
+    if (paused) return; // Pause auto-scroll if paused
     const interval = setInterval(() => {
       if (currentImageIndex === heroImages.length - 1) {
         setIsFading(true);
@@ -155,10 +158,10 @@ export default function Home() {
       } else {
         setCurrentImageIndex((prevIndex) => prevIndex + 1);
       }
-    }, 5000);
+    }, 3000);
 
     return () => clearInterval(interval);
-  }, [currentImageIndex]);
+  }, [currentImageIndex, paused]);
 
   const row1 = featuredProducts.slice(0, 4);
   const row2 = featuredProducts.slice(4, 6);
@@ -215,6 +218,15 @@ export default function Home() {
                   ) : null
                 )
               )}
+
+              {/* Pause/Play Button */}
+              <button
+                onClick={() => setPaused((prev) => !prev)}
+                className="absolute bottom-4 right-4 bg-black text-white p-2 rounded-full z-20 hover:bg-white hover:text-black transition"
+                aria-label={paused ? "Play" : "Pause"}
+              >
+                {paused ? <Play size={20} /> : <Pause size={20} />}
+              </button>
 
 
               {/* Image indicators */}
