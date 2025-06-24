@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Plus, Edit, Trash2, Eye, ToggleLeft, ToggleRight, ChevronLeft, ChevronRight, LogOut, User, X, Settings, Search, Filter } from 'lucide-react';
+import { Plus, Edit, Trash2, Eye, ToggleLeft, ToggleRight, ChevronLeft, ChevronRight, LogOut, User, X, Settings, Search, Filter, Camera, Upload } from 'lucide-react';
 import { Link } from 'react-router';
 import PostAdvert from './AddProduct';
 import Footer from '../components/Footer';
@@ -23,116 +23,116 @@ export default function VendorDashboard() {
     const itemsPerPage = 10;
 
     const advert = [
-        {
-            id: 1,
-            image: 'https://neobrake.com/wp-content/uploads/2016/06/NeoBrake-Air-Disc-Brake-Pads-2.1.png',
-            title: 'Ceramic Brake Pads',
-            brand: 'Bosch',
-            category: 'Braking System',
-            status: 'Available',
-            created: '2025-06-01T10:00:00Z',
-            price: 'GHc75.00',
-        },
-        {
-            id: 4,
-            image: 'https://neobrake.com/wp-content/uploads/2016/06/NeoBrake-Air-Disc-Brake-Pads-2.1.png',
-            title: 'Ceramic Brake Pads',
-            brand: 'Bosch',
-            category: 'Braking System',
-            status: 'Available',
-            created: '2025-06-01T10:00:00Z',
-            price: 'GHc75.00',
-        },
-        {
-            id: 2,
-            image: 'https://media.istockphoto.com/id/1282831927/photo/power-steering-rack.jpg?s=612x612&w=0&k=20&c=RSzMcW5KifTRjsea8B0rOCYd4aeD_CcBfdQlgWuTgx4=',
-            title: 'Steering Rack',
-            brand: 'Toyota',
-            category: 'Steering System',
-            status: 'Not available',
-            created: '2025-06-01T10:00:00Z',
-            price: 'GHc400.00',
-        },
-        {
-            id: 3,
-            image: 'https://media.istockphoto.com/id/1282831927/photo/power-steering-rack.jpg?s=612x612&w=0&k=20&c=RSzMcW5KifTRjsea8B0rOCYd4aeD_CcBfdQlgWuTgx4=',
-            title: 'Power Steering Pump',
-            brand: 'Honda',
-            category: 'Steering System',
-            status: 'Available',
-            created: '2025-06-01T10:00:00Z',
-            price: 'GHc350.00',
-        },
-        {
-            id: 5,
-            image: 'https://media.istockphoto.com/id/1282831927/photo/power-steering-rack.jpg?s=612x612&w=0&k=20&c=RSzMcW5KifTRjsea8B0rOCYd4aeD_CcBfdQlgWuTgx4=',
-            title: 'Oil Filter',
-            brand: 'Fram',
-            category: 'Engine Parts',
-            status: 'Available',
-            created: '2025-06-01T10:00:00Z',
-            price: 'GHc25.00',
-        },
-        {
-            id: 6,
-            image: 'https://media.istockphoto.com/id/1282831927/photo/power-steering-rack.jpg?s=612x612&w=0&k=20&c=RSzMcW5KifTRjsea8B0rOCYd4aeD_CcBfdQlgWuTgx4=',
-            title: 'Air Filter',
-            brand: 'K&N',
-            category: 'Engine Parts',
-            status: 'Not available',
-            created: '2025-06-01T10:00:00Z',
-            price: 'GHc45.00',
-        },
-        {
-            id: 7,
-            image: 'https://media.istockphoto.com/id/1282831927/photo/power-steering-rack.jpg?s=612x612&w=0&k=20&c=RSzMcW5KifTRjsea8B0rOCYd4aeD_CcBfdQlgWuTgx4=',
-            title: 'Spark Plugs',
-            brand: 'NGK',
-            category: 'Engine Parts',
-            status: 'Available',
-            created: '2025-06-01T10:00:00Z',
-            price: 'GHc15.00',
-        },
-        {
-            id: 8,
-            image: 'https://media.istockphoto.com/id/1282831927/photo/power-steering-rack.jpg?s=612x612&w=0&k=20&c=RSzMcW5KifTRjsea8B0rOCYd4aeD_CcBfdQlgWuTgx4=',
-            title: 'Brake Discs',
-            brand: 'Brembo',
-            category: 'Braking System',
-            status: 'Available',
-            created: '2025-06-01T10:00:00Z',
-            price: 'GHc120.00',
-        },
-        {
-            id: 9,
-            image: 'https://media.istockphoto.com/id/1282831927/photo/power-steering-rack.jpg?s=612x612&w=0&k=20&c=RSzMcW5KifTRjsea8B0rOCYd4aeD_CcBfdQlgWuTgx4=',
-            title: 'Headlight Bulbs',
-            brand: 'Philips',
-            category: 'Electrical',
-            status: 'Available',
-            created: '2025-06-01T10:00:00Z',
-            price: 'GHc30.00',
-        },
-        {
-            id: 10,
-            image: 'https://media.istockphoto.com/id/1282831927/photo/power-steering-rack.jpg?s=612x612&w=0&k=20&c=RSzMcW5KifTRjsea8B0rOCYd4aeD_CcBfdQlgWuTgx4=',
-            title: 'Battery',
-            brand: 'Exide',
-            category: 'Electrical',
-            status: 'Not available',
-            created: '2025-06-01T10:00:00Z',
-            price: 'GHc180.00',
-        },
-        {
-            id: 11,
-            image: 'https://media.istockphoto.com/id/1282831927/photo/power-steering-rack.jpg?s=612x612&w=0&k=20&c=RSzMcW5KifTRjsea8B0rOCYd4aeD_CcBfdQlgWuTgx4=',
-            title: 'Alternator',
-            brand: 'Bosch',
-            category: 'Electrical',
-            status: 'Available',
-            created: '2025-06-01T10:00:00Z',
-            price: 'GHc250.00',
-        },
+        // {
+        //     id: 1,
+        //     image: 'https://neobrake.com/wp-content/uploads/2016/06/NeoBrake-Air-Disc-Brake-Pads-2.1.png',
+        //     title: 'Ceramic Brake Pads',
+        //     brand: 'Bosch',
+        //     category: 'Braking System',
+        //     status: 'Available',
+        //     created: '2025-06-01T10:00:00Z',
+        //     price: 'GHc75.00',
+        // },
+        // {
+        //     id: 4,
+        //     image: 'https://neobrake.com/wp-content/uploads/2016/06/NeoBrake-Air-Disc-Brake-Pads-2.1.png',
+        //     title: 'Ceramic Brake Pads',
+        //     brand: 'Bosch',
+        //     category: 'Braking System',
+        //     status: 'Available',
+        //     created: '2025-06-01T10:00:00Z',
+        //     price: 'GHc75.00',
+        // },
+        // {
+        //     id: 2,
+        //     image: 'https://media.istockphoto.com/id/1282831927/photo/power-steering-rack.jpg?s=612x612&w=0&k=20&c=RSzMcW5KifTRjsea8B0rOCYd4aeD_CcBfdQlgWuTgx4=',
+        //     title: 'Steering Rack',
+        //     brand: 'Toyota',
+        //     category: 'Steering System',
+        //     status: 'Not available',
+        //     created: '2025-06-01T10:00:00Z',
+        //     price: 'GHc400.00',
+        // },
+        // {
+        //     id: 3,
+        //     image: 'https://media.istockphoto.com/id/1282831927/photo/power-steering-rack.jpg?s=612x612&w=0&k=20&c=RSzMcW5KifTRjsea8B0rOCYd4aeD_CcBfdQlgWuTgx4=',
+        //     title: 'Power Steering Pump',
+        //     brand: 'Honda',
+        //     category: 'Steering System',
+        //     status: 'Available',
+        //     created: '2025-06-01T10:00:00Z',
+        //     price: 'GHc350.00',
+        // },
+        // {
+        //     id: 5,
+        //     image: 'https://media.istockphoto.com/id/1282831927/photo/power-steering-rack.jpg?s=612x612&w=0&k=20&c=RSzMcW5KifTRjsea8B0rOCYd4aeD_CcBfdQlgWuTgx4=',
+        //     title: 'Oil Filter',
+        //     brand: 'Fram',
+        //     category: 'Engine Parts',
+        //     status: 'Available',
+        //     created: '2025-06-01T10:00:00Z',
+        //     price: 'GHc25.00',
+        // },
+        // {
+        //     id: 6,
+        //     image: 'https://media.istockphoto.com/id/1282831927/photo/power-steering-rack.jpg?s=612x612&w=0&k=20&c=RSzMcW5KifTRjsea8B0rOCYd4aeD_CcBfdQlgWuTgx4=',
+        //     title: 'Air Filter',
+        //     brand: 'K&N',
+        //     category: 'Engine Parts',
+        //     status: 'Not available',
+        //     created: '2025-06-01T10:00:00Z',
+        //     price: 'GHc45.00',
+        // },
+        // {
+        //     id: 7,
+        //     image: 'https://media.istockphoto.com/id/1282831927/photo/power-steering-rack.jpg?s=612x612&w=0&k=20&c=RSzMcW5KifTRjsea8B0rOCYd4aeD_CcBfdQlgWuTgx4=',
+        //     title: 'Spark Plugs',
+        //     brand: 'NGK',
+        //     category: 'Engine Parts',
+        //     status: 'Available',
+        //     created: '2025-06-01T10:00:00Z',
+        //     price: 'GHc15.00',
+        // },
+        // {
+        //     id: 8,
+        //     image: 'https://media.istockphoto.com/id/1282831927/photo/power-steering-rack.jpg?s=612x612&w=0&k=20&c=RSzMcW5KifTRjsea8B0rOCYd4aeD_CcBfdQlgWuTgx4=',
+        //     title: 'Brake Discs',
+        //     brand: 'Brembo',
+        //     category: 'Braking System',
+        //     status: 'Available',
+        //     created: '2025-06-01T10:00:00Z',
+        //     price: 'GHc120.00',
+        // },
+        // {
+        //     id: 9,
+        //     image: 'https://media.istockphoto.com/id/1282831927/photo/power-steering-rack.jpg?s=612x612&w=0&k=20&c=RSzMcW5KifTRjsea8B0rOCYd4aeD_CcBfdQlgWuTgx4=',
+        //     title: 'Headlight Bulbs',
+        //     brand: 'Philips',
+        //     category: 'Electrical',
+        //     status: 'Available',
+        //     created: '2025-06-01T10:00:00Z',
+        //     price: 'GHc30.00',
+        // },
+        // {
+        //     id: 10,
+        //     image: 'https://media.istockphoto.com/id/1282831927/photo/power-steering-rack.jpg?s=612x612&w=0&k=20&c=RSzMcW5KifTRjsea8B0rOCYd4aeD_CcBfdQlgWuTgx4=',
+        //     title: 'Battery',
+        //     brand: 'Exide',
+        //     category: 'Electrical',
+        //     status: 'Not available',
+        //     created: '2025-06-01T10:00:00Z',
+        //     price: 'GHc180.00',
+        // },
+        // {
+        //     id: 11,
+        //     image: 'https://media.istockphoto.com/id/1282831927/photo/power-steering-rack.jpg?s=612x612&w=0&k=20&c=RSzMcW5KifTRjsea8B0rOCYd4aeD_CcBfdQlgWuTgx4=',
+        //     title: 'Alternator',
+        //     brand: 'Bosch',
+        //     category: 'Electrical',
+        //     status: 'Available',
+        //     created: '2025-06-01T10:00:00Z',
+        //     price: 'GHc250.00',
+        // },
         {
             id: 12,
             image: 'https://media.istockphoto.com/id/1282831927/photo/power-steering-rack.jpg?s=612x612&w=0&k=20&c=RSzMcW5KifTRjsea8B0rOCYd4aeD_CcBfdQlgWuTgx4=',
@@ -207,6 +207,7 @@ export default function VendorDashboard() {
         }));
     };
 
+
     const renderAdverts = () => {
         return currentAdverts.map((ad) => (
             <tr key={ad.id} className="border-b border-gray-100 hover:bg-gray-50 transition-colors duration-150">
@@ -225,7 +226,7 @@ export default function VendorDashboard() {
                 <td className="py-2 px-4 sm:px-3 text-xs sm:text-sm text-gray-600 hidden sm:table-cell">{ad.brand}</td>
                 <td className="py-2 px-4 sm:px-3">
                     <span className={`inline-flex px-2 py-0.5 text-xs sm:text-sm font-medium rounded-full ${ad.status === 'Available'
-                        ? 'bg-green-100 text-green-800'
+                        ? 'bg-green-100 text-green-700'
                         : 'bg-red-100 text-red-800'
                         }`}>
                         {ad.status}
@@ -234,6 +235,8 @@ export default function VendorDashboard() {
                 <td className="py-2 px-4 sm:px-3 text-xs sm:text-sm text-gray-600 hidden md:table-cell">
                     {new Date(ad.created).toDateString()}
                 </td>
+
+                {/*Table icons */}
                 <td className="py-2 px-4 sm:px-3">
                     <div className="flex gap-1 justify-center">
                         <Link to="/view-product">
@@ -266,11 +269,18 @@ export default function VendorDashboard() {
         ));
     };
 
+
+
     return (
 
         <>
 
+
+
             <div className="p-4 sm:p-6 bg-white min-h-screen">
+
+
+
                 {/* Header with Profile and Logout */}
                 <div className="flex flex-col sm:flex-row justify-between items-start mb-6 gap-4">
                     <div>
@@ -280,6 +290,35 @@ export default function VendorDashboard() {
                         </p>
                     </div>
                     <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
+
+                        {/* Profile image placeholder */}
+                        <div className="relative group w-12 h-12 rounded-full bg-gradient-to-br from-gray-200 to-gray-300 border-2 border-gray-300 flex items-center justify-center cursor-pointer transition-all duration-200 hover:border-blue-500 hover:scale-105 overflow-hidden">
+
+
+                            <img
+                                src=""
+                                alt="Profile"
+                                className="w-full h-full object-cover rounded-full"
+                            />
+
+                            <User className="w-5 h-5 text-gray-500" />
+
+
+                            {/* Upload Overlay */}
+                            <div className="absolute inset-0 bg-blue-500 bg-opacity-90 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                                <span className="text-white text-xs font-medium">Upload</span>
+                            </div>
+
+                            {/* Hidden File Input */}
+                            <input
+                                type="file"
+                                accept="image/*"
+
+                                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                                title="Upload Profile Picture"
+                            />
+                        </div>
+
                         <button
                             onClick={() => setShowProfileModal(true)}
                             className="flex items-center gap-2 bg-black hover:bg-gray-700 text-white font-medium px-4 py-2 rounded-lg transition-colors w-full sm:w-auto"
@@ -299,7 +338,10 @@ export default function VendorDashboard() {
                             <LogOut size={16} />
                             Logout
                         </button>
+
                     </div>
+
+
                 </div>
 
                 {/* Stats */}
@@ -460,9 +502,7 @@ export default function VendorDashboard() {
                         <div className="text-gray-400 text-4xl sm:text-5xl mb-4">+</div>
                         <p className="text-gray-700 font-medium mb-1 text-sm sm:text-base">No adverts yet</p>
                         <p className="mb-4 text-sm sm:text-base">Post your first Ad, your Customers are waiting!</p>
-                        <button
-
-                            className="bg-black hover:bg-gray-700 text-white font-medium px-4 sm:px-6 py-2 rounded-lg"
+                        <button className="bg-black hover:bg-gray-700 text-white font-medium px-4 sm:px-6 py-2 rounded-lg"
                         >
                             + Post Your First Advert
                         </button>
@@ -564,12 +604,10 @@ export default function VendorDashboard() {
                     </div>
                 )}
 
-                {/* {showAddProductModal && (
-                <PostAdvert />
-            )} */}
+
 
                 {showProfileModal && (
-                    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+                    <div className="fixed inset-0 backdrop-blur-sm bg-opacity-10 flex items-center justify-center z-50 p-4">
                         <div className="bg-white rounded-lg w-full max-w-md sm:max-w-lg max-h-[90vh] overflow-y-auto">
                             <div className="p-4 sm:p-6">
                                 <div className="flex justify-between items-center mb-4 sm:mb-6">
@@ -699,6 +737,7 @@ export default function VendorDashboard() {
                         </div>
                     </div>
                 )}
+
             </div>
 
 
