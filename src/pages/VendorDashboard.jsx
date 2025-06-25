@@ -12,13 +12,7 @@ export default function VendorDashboard() {
     const [showFilters, setShowFilters] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
     const [filters, setFilters] = useState({ category: '', status: '', brand: '' });
-    const [profileData, setProfileData] = useState({
-        name: 'Kojo Oppong',
-        email: 'princedarf1@gmail.com',
-        phone: '+233 24 123 4567',
-        company: 'Auto Parts Ghana',
-        address: 'Accra, Ghana'
-    });
+
 
     const itemsPerPage = 10;
 
@@ -145,7 +139,7 @@ export default function VendorDashboard() {
         },
     ];
 
-    // Get unique values for filter Monastero Maggiorefilter options
+    // Get unique values for filter options
     const categories = [...new Set(advert.map(ad => ad.category))];
     const brands = [...new Set(advert.map(ad => ad.brand))];
     const statuses = [...new Set(advert.map(ad => ad.status))];
@@ -190,22 +184,14 @@ export default function VendorDashboard() {
         setCurrentPage(1);
     };
 
-    const handleProfileUpdate = () => {
-        console.log('Profile updated:', profileData);
-        setShowProfileModal(false);
-    };
+
 
     const handleLogout = () => {
         console.log('Logging out...');
         setShowLogoutConfirm(false);
     };
 
-    const handleInputChange = (field, value) => {
-        setProfileData(prev => ({
-            ...prev,
-            [field]: value
-        }));
-    };
+
 
 
     const renderAdverts = () => {
@@ -225,12 +211,7 @@ export default function VendorDashboard() {
                 <td className="py-2 px-4 sm:px-3 text-xs sm:text-sm text-gray-600 hidden sm:table-cell">{ad.category}</td>
                 <td className="py-2 px-4 sm:px-3 text-xs sm:text-sm text-gray-600 hidden sm:table-cell">{ad.brand}</td>
                 <td className="py-2 px-4 sm:px-3">
-                    <span className={`inline-flex px-2 py-0.5 text-xs sm:text-sm font-medium rounded-full ${ad.status === 'Available'
-                        ? 'bg-green-100 text-green-700'
-                        : 'bg-red-100 text-red-800'
-                        }`}>
-                        {ad.status}
-                    </span>
+                    <span className={`inline-flex px-2 py-0.5 text-xs sm:text-sm font-medium rounded-full ${ad.status === 'Available' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-800'}`}>{ad.status}</span>
                 </td>
                 <td className="py-2 px-4 sm:px-3 text-xs sm:text-sm text-gray-600 hidden md:table-cell">
                     {new Date(ad.created).toDateString()}
@@ -286,7 +267,7 @@ export default function VendorDashboard() {
                     <div>
                         <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Vendor Dashboard</h1>
                         <p className="text-gray-800 mt-1 text-sm sm:text-base">
-                            Welcome back, <span className="text-blue-500">{profileData.name}</span>
+                            Welcome back, <span className="text-blue-500">Vendor name</span>
                         </p>
                     </div>
                     <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
@@ -627,7 +608,7 @@ export default function VendorDashboard() {
                                         </label>
                                         <input
                                             type="text"
-                                            value={profileData.name}
+
                                             onChange={(e) => handleInputChange('name', e.target.value)}
                                             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
                                             required
@@ -640,7 +621,7 @@ export default function VendorDashboard() {
                                         </label>
                                         <input
                                             type="email"
-                                            value={profileData.email}
+
                                             onChange={(e) => handleInputChange('email', e.target.value)}
                                             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
                                             required
@@ -653,7 +634,7 @@ export default function VendorDashboard() {
                                         </label>
                                         <input
                                             type="tel"
-                                            value={profileData.phone}
+
                                             onChange={(e) => handleInputChange('phone', e.target.value)}
                                             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
                                             required
@@ -666,7 +647,7 @@ export default function VendorDashboard() {
                                         </label>
                                         <input
                                             type="text"
-                                            value={profileData.company}
+
                                             onChange={(e) => handleInputChange('company', e.target.value)}
                                             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
                                             required
@@ -678,7 +659,7 @@ export default function VendorDashboard() {
                                             Business Address
                                         </label>
                                         <textarea
-                                            value={profileData.address}
+
                                             onChange={(e) => handleInputChange('address', e.target.value)}
                                             rows={3}
                                             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
@@ -688,7 +669,7 @@ export default function VendorDashboard() {
 
                                     <div className="flex flex-col sm:flex-row gap-3 pt-4">
                                         <button
-                                            onClick={handleProfileUpdate}
+
                                             className="flex-1 bg-black hover:bg-gray-700 text-white font-medium py-2 px-4 rounded-md transition-colors text-sm sm:text-base"
                                         >
                                             Save Changes

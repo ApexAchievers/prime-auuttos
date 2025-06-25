@@ -1,56 +1,17 @@
 import { useState } from 'react';
 import { Upload, File } from 'lucide-react';
 import Footer from '../components/Footer';
+import Navbar from '../components/Navbar';
 
 
 
 export default function PostAdvert() {
-    // const [formData, setFormData] = useState({
-    //     productTitle: '',
-    //     price: '',
-    //     category: '',
-    //     brand: '',
-    //     partNumber: '',
-    //     condition: 'New',
-    //     description: '',
-    //     images: []
-    // });
-
-    // const categories = [
-    //     'Select Category',
-    //     'Engine & Mechanical Components',
-    //     'Transmission and Drivetrain',
-    //     'Suspension and Steering',
-    //     'Braking System',
-    //     'Electrical and Battery System',
-    //     'Lights & Indicators',
-    //     'Climate & Comfort',
-    //     'Body & Exterior',
-    //     'Interior Components',
-
-    // ];
-
-    // const conditions = ['New', 'Used', 'Refurbished'];
-
-    // const handleInputChange = (e) => {
-    //     const { name, value } = e.target;
-    //     setFormData(prev => ({
-    //         ...prev,
-    //         [name]: value
-    //     }));
-    // };
-
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     console.log('Form submitted:', formData);
-    //     // Handle form submission logic here
-    // };
-
-
+    
 
     return (
 
         <>
+
             <div className="min-h-screen bg-gray-100 p-4 bg-[url('./assets/images/dashboardbg.jpg')] bg-cover bg-center rounded-md">
                 <div className="max-w-2xl mx-auto">
                     {/* Header */}
@@ -70,7 +31,7 @@ export default function PostAdvert() {
                                 <label className="text-sm font-medium text-gray-700 mb-2">
                                     Product Title <span className="text-red-500">*</span>
                                 </label>
-                                <div className="relative flex items-center"> 
+                                <div className="relative flex items-center">
                                     <span className="absolute left-3 text-gray-400">
                                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
@@ -138,8 +99,6 @@ export default function PostAdvert() {
                                         <option> Hummer </option>
                                         <option> Porsche </option>
                                         <option> Tesla </option>
-
-
 
                                     </select>
                                 </div>
