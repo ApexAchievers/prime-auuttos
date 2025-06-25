@@ -3,6 +3,7 @@ import MainLayout from "./layouts/MainLayout";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import ResetPassword from "./pages/ResetPassword";
 import AddProduct from "./pages/AddProduct";
 import EditProduct from "./pages/EditProduct";
 import ViewProduct from "./pages/ViewProduct";
@@ -26,7 +27,6 @@ import SuspensionSteering from "./pages/SuspensionSteering";
 import TransmissionDrivetrain from "./pages/TransmissionDrivetrain";
 
 const primeAuttosRouter = createBrowserRouter([
-
   {
     path: "/",
     element: <MainLayout />,
@@ -34,6 +34,7 @@ const primeAuttosRouter = createBrowserRouter([
       { path: "/", element: <Home /> },
       { path: "/register", element: <Register /> },
       { path: "/login", element: <Login /> },
+      { path: "/reset-password", element: <ResetPassword /> },
       { path: "/add-product", element: <AddProduct /> },
       { path: "/edit-product", element: <EditProduct /> },
       { path: "/view-product", element: <ViewProduct /> },
@@ -53,9 +54,8 @@ const primeAuttosRouter = createBrowserRouter([
       { path: "/transmission-drivetrain", element: <TransmissionDrivetrain /> },
       { path: "/cart-test", element: <CartTest /> },
       { path: "*", element: <NotFound /> },
-
-    ]
-  }
+    ],
+  },
 ]);
 
 function App() {
