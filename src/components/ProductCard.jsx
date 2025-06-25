@@ -2,13 +2,17 @@ import pc6 from '../assets/images/pc6.PNG';
 import { ShoppingCart } from 'lucide-react';
 
 
-export default function ProductCard() {
+export default function ProductCard({ viewMode}) {
     return (
-        <div className="max-w-xs w-full mx-auto rounded-sm shadow-2xl overflow-hidden bg-white transition-transform transform hover:scale-105">
-            <img 
-                src={pc6} 
-                alt="Brake Pads" 
-                className="w-full h-50 object-cover p-2" 
+        <div className={
+            viewMode === 'list'
+                ? 'flex w-full shadow-xl overflow-hidden bg-white mb-4'
+                : 'max-w-xs w-full mx-auto shadow-2xl overflow-hidden bg-white'
+        }>
+            <img
+                src={pc6}
+                alt="Brake Pads"
+                className={viewMode === 'list' ? 'w-50 h-32 object-cover p-2' : 'w-full h-50 object-cover p-2'}
             />
 
             <div className="p-3">
