@@ -3,9 +3,36 @@ import SubmitButton from "../components/SubmitButton";
 import { User, UserCheck } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router";
+import { apiClient } from "../api/client";
+import { useNavigate } from "react-router";
 
 export default function Login() {
+  const navigate = useNavigate();
+
   const [role, setRole] = useState("user");
+  
+
+  const userLogin = async (data) => {
+
+    try{
+      const response = await apiClient.post("/auth/login", data, {
+        headers: {
+          "Content-Type":"application/json"
+        }
+      }
+        
+       );
+      console.log(response.data);
+      localStorage.setItem('token', response.data.token);
+      navigate('/');
+
+    } catch (error) {
+      console.log(error);
+    }
+    
+  }
+
+
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
@@ -53,6 +80,7 @@ export default function Login() {
               <label className="flex items-center">
                 <input
                   type="radio"
+                  name="role"
                   value="user"
                   className="mr-2"
                   checked={role === "user"}
@@ -64,6 +92,7 @@ export default function Login() {
               <label className="flex items-center">
                 <input
                   type="radio"
+                  name="role"
                   value="vendor"
                   className="mr-2"
                   checked={role === "vendor"}
@@ -76,7 +105,7 @@ export default function Login() {
           </div>
 
           {/* Form Section */}
-          <form className="space-y-4">
+          <form action={userLogin} className="space-y-4">
             <div className="flex flex-col">
               <label
                 htmlFor="email"
