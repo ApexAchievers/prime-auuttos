@@ -2,7 +2,9 @@ import { createBrowserRouter, RouterProvider } from "react-router";
 import MainLayout from "./layouts/MainLayout";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
+import Otp from "./pages/OTP";
 import Login from "./pages/Login";
+import ResetPassword from "./pages/ResetPassword";
 import AddProduct from "./pages/AddProduct";
 import EditProduct from "./pages/EditProduct";
 import ViewProduct from "./pages/ViewProduct";
@@ -10,8 +12,6 @@ import VendorDashboard from "./pages/VendorDashboard";
 import CartTest from "./pages/CartTestPage";
 import CartProvider from "./context/CartContext";
 import NotFound from "./pages/NotFound";
-
-import SingleAdvert from "./pages/SingleAdvert";
 import BatteryElectricity from "./pages/BatteryElectricity";
 import BikeAccessories from "./pages/BikeAccessories";
 import BodyExterior from "./pages/BodyExterior";
@@ -25,16 +25,21 @@ import LightIndicators from "./pages/LightIndicators";
 import Services from "./pages/Services";
 import SuspensionSteering from "./pages/SuspensionSteering";
 import TransmissionDrivetrain from "./pages/TransmissionDrivetrain";
+import Payment from "./pages/Payment";
+
+
 
 const primeAuttosRouter = createBrowserRouter([
-
   {
     path: "/",
     element: <MainLayout />,
     children: [
       { path: "/", element: <Home /> },
       { path: "/register", element: <Register /> },
+      { path: "/otp", element: <Otp /> },
       { path: "/login", element: <Login /> },
+      { path: "/reset-password", element: <ResetPassword /> },
+      { path: "/payment", element: <Payment /> },
       { path: "/add-product", element: <AddProduct /> },
       { path: "/edit-product", element: <EditProduct /> },
       { path: "/view-product", element: <ViewProduct /> },
@@ -55,9 +60,8 @@ const primeAuttosRouter = createBrowserRouter([
       { path: "/transmission-drivetrain", element: <TransmissionDrivetrain /> },
       { path: "/cart-test", element: <CartTest /> },
       { path: "*", element: <NotFound /> },
-
-    ]
-  }
+    ],
+  },
 ]);
 
 function App() {
