@@ -12,6 +12,8 @@ import VendorDashboard from "./pages/VendorDashboard";
 import CartTest from "./pages/CartTestPage";
 import CartProvider from "./context/CartContext";
 import NotFound from "./pages/NotFound";
+
+import SingleAdvert from "./pages/SingleAdvert";
 import BatteryElectricity from "./pages/BatteryElectricity";
 import BikeAccessories from "./pages/BikeAccessories";
 import BodyExterior from "./pages/BodyExterior";
