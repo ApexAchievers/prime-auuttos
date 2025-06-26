@@ -5,7 +5,7 @@ import { User, UserCheck, LogOut } from "lucide-react";
 import { apiClient } from "../api/client";
 import useSWR from "swr";
 import { useNavigate } from "react-router";
-import { apiFetcher } from "../api/client";
+
 
 export default function Register() {
   const navigate = useNavigate();
@@ -26,20 +26,13 @@ export default function Register() {
 
       navigate("/otp?");
 
-      // // if (response.data.success || response.data.otpSent) {
-      //   setShowOtpPopup(true);
-      // // }
+      
     } catch (error) {
       console.log(error);
     }
   };
 
-  // const { data } = useSWR("/auth/me", apiFetcher);
-
-  // const logout = () => {
-  //   localStorage.removeItem("token");
-  //   navigate("/login");
-  // };
+  
 
   return (
     <>
@@ -66,19 +59,6 @@ export default function Register() {
             <h1 className="text-white text-3xl sm:text-4xl font-bold mb-2">
               Welcome To Prime Auuttos
             </h1>
-
-            {/* <div className="flex items-center gap-3">
-              <h1 className="text-sm font-semibold">
-                {data?.fullname || "Unknown User"}
-              </h1>
-              <button
-                onClick={logout}
-                className="flex items-center gap-1 bg-white text-black px-3 py-1 rounded-full hover:bg-gray-200 text-sm font-medium transition"
-              >
-                <LogOut className="w-4 h-4" />
-                Logout
-              </button>
-            </div> */}
 
             <p className="text-gray-300 text-xl sm:text-2xl font-semibold">
               Trust us for quality services
