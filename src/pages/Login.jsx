@@ -1,30 +1,53 @@
-import backgroundVideo from "../assets/videos/background-1.mp4";
+import image from "../assets/images/nimg.jpg";
 import SubmitButton from "../components/SubmitButton";
 import { User, UserCheck } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router";
+import { apiClient } from "../api/client";
+import { useNavigate } from "react-router";
 
 export default function Login() {
-  const [role, setRole] = useState('user');
+  const navigate = useNavigate();
+
+  const [role, setRole] = useState("user");
+  
+
+  const userLogin = async (data) => {
+
+    try{
+      const response = await apiClient.post("/auth/login", data, {
+        headers: {
+          "Content-Type":"application/json"
+        }
+      }
+        
+       );
+      console.log(response.data);
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('user', JSON.stringify(response.data.user));
+      navigate('/');
+
+    } catch (error) {
+      console.log(error);
+    }
+    
+  }
+
+
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
-      {/* Video On The Left */}
-      <div className="w-full md:w-1/2 relative h-64 md:h-auto">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute top-0 left-0 w-full h-full object-cover z-0"
-        >
-          <source src={backgroundVideo} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+      {/* image On The Left */}
+      <div className="w-full md:w-1/2 relative h-96 md:h-screen overflow-hidden">
+        <img
+          src={image}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover object-center z-0"
+        />
 
-        {/* Overlay for better text visibility */}
         <div className="absolute inset-0 bg-black/50 z-10" />
 
-        {/* Text on Video */}
+        {/* Text on Image */}
         <div className="relative z-20 flex flex-col items-center justify-center h-full px-6 text-center">
           <h1 className="text-white text-4xl font-bold mb-2">
             Welcome To Prime Auuttos
@@ -56,12 +79,26 @@ export default function Login() {
             </label>
             <div className="flex flex-wrap gap-4">
               <label className="flex items-center">
-                <input type="radio" value="user" className="mr-2" checked = {role === 'user'} onChange={() => setRole('user')} />
+                <input
+                  type="radio"
+                  name="role"
+                  value="user"
+                  className="mr-2"
+                  checked={role === "user"}
+                  onChange={() => setRole("user")}
+                />
                 <User size={16} className="mr-1" />
                 User
               </label>
               <label className="flex items-center">
-                <input type="radio" value="vendor" className="mr-2" checked = {role === 'vendor'} onChange={() => setRole('vendor')}/>
+                <input
+                  type="radio"
+                  name="role"
+                  value="vendor"
+                  className="mr-2"
+                  checked={role === "vendor"}
+                  onChange={() => setRole("vendor")}
+                />
                 <UserCheck size={16} className="mr-1" />
                 Vendor
               </label>
@@ -69,7 +106,7 @@ export default function Login() {
           </div>
 
           {/* Form Section */}
-          <form className="space-y-4">
+          <form action={userLogin} className="space-y-4">
             <div className="flex flex-col">
               <label
                 htmlFor="email"
@@ -108,6 +145,16 @@ export default function Login() {
               />
             </div>
           </form>
+
+          <div className="flex justify-center">
+            <h1>
+              <span className="font-bold">Forgot Password?</span>
+              <Link to={"/reset-password"} className="text-blue-700">
+                {" "}
+                Click here!
+              </Link>
+            </h1>
+          </div>
         </div>
       </div>
     </div>
