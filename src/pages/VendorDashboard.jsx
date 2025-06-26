@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Plus, Edit, Trash2, Eye, ToggleLeft, ToggleRight, ChevronLeft, ChevronRight, LogOut, User, X, Settings, Search, Filter, Camera, Upload } from 'lucide-react';
-import { Link, useNavigate } from 'react-router';
+import { Link, Navigate, useNavigate } from 'react-router';
 import PostAdvert from './AddProduct';
 import Footer from '../components/Footer';
 import useSWR from 'swr';
