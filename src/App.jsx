@@ -64,6 +64,8 @@ const primeAuttosRouter = createBrowserRouter([
       { path: "*", element: <NotFound /> },
       { path: "/terms-conditions", element: <TermsConditions /> },
       { path: "/contact", element: <Contact /> },
+      { path: "/otp?", element: <Otp /> },
+
 
     ]
   }
