@@ -1,5 +1,5 @@
 import { SquarePen } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, } from 'react';
 import { Moon } from 'lucide-react';
 import { useSearchParams, useNavigate } from 'react-router';
 import Footer from '../components/Footer';
@@ -43,10 +43,16 @@ export default function EditProduct() {
                     },
                 });
             console.log(response);
+            if (response.success === 200 || 201) {
+                toast.success("Edited successfully")
+            }
             navigate(-1);
 
         } catch (error) {
             console.log(error);
+            if (error) {
+                toast.success(error.message);
+            }
         }
     };
 
