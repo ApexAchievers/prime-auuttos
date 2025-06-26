@@ -3,6 +3,7 @@ import { Upload, File } from 'lucide-react';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import { apiClient } from '../api/client';
+import { toast } from 'react-toastify';
 
 
 
@@ -21,9 +22,15 @@ export default function PostAdvert() {
             });;
 
             console.log(response);
+            if(response.success === 200 || 201) {
+                toast.success("Ad added successfully")
+            }
             // Navigate("/");
         } catch (error) {
             console.log(error);
+        if (error) {
+            toast.success(error.message);
+        }
         }
     };
 
@@ -302,16 +309,16 @@ export default function PostAdvert() {
                                 </div>
 
 
-                                {/* Year */}
+                                Year
                                 <div className="flex flex-col flex-1">
                                     <label className="text-sm font-medium text-gray-700 mb-2 ">
-                                        Year <span className="text-red-500">*</span>
+                                        Location <span className="text-red-500">*</span>
                                     </label>
                                     <div className="relative flex items-center">
 
                                         <input
-                                            type="number"
-                                            name="price"
+                                            type="text"
+                                            name="location"
 
                                             placeholder="eg; 1995"
                                             className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none bg-white"
@@ -329,11 +336,11 @@ export default function PostAdvert() {
                                 {/* Brand */}
                                 <div className="flex flex-col flex-1">
                                     <label className="text-sm font-medium text-gray-700 mb-2">
-                                        Brand <span className="text-red-500">*</span>
+                                        Item <span className="text-red-500">*</span>
                                     </label>
                                     <input
                                         type="text"
-                                        name="brand"
+                                        name="item"
 
                                         placeholder="e.g., Brembo"
                                         className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
