@@ -10,7 +10,8 @@ import VendorDashboard from "./pages/VendorDashboard";
 import CartTest from "./pages/CartTestPage";
 import CartProvider from "./context/CartContext";
 import NotFound from "./pages/NotFound";
-
+import TermsConditions from "./pages/TermsConditions";
+import Contact from "./pages/Contact";
 import BatteryElectricity from "./pages/BatteryElectricity";
 import BikeAccessories from "./pages/BikeAccessories";
 import BodyExterior from "./pages/BodyExterior";
@@ -32,7 +33,7 @@ const primeAuttosRouter = createBrowserRouter([
     element: <MainLayout />,
     children: [
       { path: "/", element: <Home /> },
-      { path: "/register", element: <Register /> },
+     
       { path: "/login", element: <Login /> },
       { path: "/add-product", element: <AddProduct /> },
       { path: "/edit-product", element: <EditProduct /> },
@@ -52,11 +53,16 @@ const primeAuttosRouter = createBrowserRouter([
       { path: "/suspension-steering", element: <SuspensionSteering /> },
       { path: "/transmission-drivetrain", element: <TransmissionDrivetrain /> },
       { path: "/cart-test", element: <CartTest /> },
-      { path: "*", element: <NotFound /> },
-
+      { path: "/terms-conditions", element: <TermsConditions /> },
+      { path: "/contact", element: <Contact /> },
     ]
-  }
+  },
+  { path: "*", element: <NotFound /> },
+   { path: "/register", element: <Register /> },
 ]);
+
+
+ 
 
 function App() {
   return (
