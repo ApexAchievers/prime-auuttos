@@ -7,7 +7,6 @@ import useSWR from "swr";
 import { useNavigate } from "react-router";
 import { apiFetcher } from "../api/client";
 
-
 export default function Register() {
   const navigate = useNavigate();
 
@@ -35,12 +34,12 @@ export default function Register() {
     }
   };
 
-  const { data } = useSWR("/auth/me", apiFetcher);
+  // const { data } = useSWR("/auth/me", apiFetcher);
 
-  const logout = () => {
-    localStorage.removeItem("token");
-    navigate("/login");
-  };
+  // const logout = () => {
+  //   localStorage.removeItem("token");
+  //   navigate("/login");
+  // };
 
   return (
     <>
@@ -68,7 +67,7 @@ export default function Register() {
               Welcome To Prime Auuttos
             </h1>
 
-            <div className="flex items-center gap-3">
+            {/* <div className="flex items-center gap-3">
               <h1 className="text-sm font-semibold">
                 {data?.fullname || "Unknown User"}
               </h1>
@@ -79,7 +78,7 @@ export default function Register() {
                 <LogOut className="w-4 h-4" />
                 Logout
               </button>
-            </div>
+            </div> */}
 
             <p className="text-gray-300 text-xl sm:text-2xl font-semibold">
               Trust us for quality services
