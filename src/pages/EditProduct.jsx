@@ -1,48 +1,10 @@
 import { SquarePen } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Moon } from 'lucide-react';
+import { useSearchParams, useNavigate } from 'react-router';
 import Footer from '../components/Footer';
+import { apiClient } from '../api/client';
 
-export function useDarkMode() {
-    
-    const navigate = useNavigate();
-
-  const [SearchParams] = useSearchParams();
-  const id = SearchParams.get("id");
-
-  const [book, setBook] = useState({});
-
-  const getBook = () => {
-    apiClient
-      .get(`/api/v1/books/${id}`)
-      .then((response) => {
-        console.log(response.data);
-        setBook(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  useEffect(getBook, []);
-
-  const putBook = async (data) => {
-    // Post Data To Api
-   try {
-      const response = await apiClient
-        .put(`/api/v1/books/${id}`, data, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-      console.log(response);
-      navigate(-1);
-
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
 
 
 
@@ -50,12 +12,49 @@ export function useDarkMode() {
 
 export default function EditProduct() {
 
-    const { toggleTheme } = useDarkMode('dark');
+    const navigate = useNavigate();
+
+    const [SearchParams] = useSearchParams();
+    const id = SearchParams.get("id");
+
+    const [product, setProduct] = useState({});
+
+    const getProduct = () => {
+        apiClient
+            .get(`/adverts/685b0b86f6f4ccaabeef3a85${id}`)
+            .then((response) => {
+                console.log(response.data);
+                setBook(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
+    useEffect(getProduct, []);
+
+    const putProduct = async (data) => {
+        // Post Data To Api
+        try {
+            const response = await apiClient
+                .put(`/adverts/685b391a64084798adbc254b${id}`, data, {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                });
+            console.log(response);
+            navigate(-1);
+
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
 
         <>
             <button
-                onClick={toggleTheme}
+
                 className="fixed top-4 right-4 z-50 bg-white dark:bg-gray-800 p-2 rounded-full shadow-md border border-gray-300 dark:border-gray-600 hover:scale-105 transition-transform"
                 aria-label="Toggle dark mode"
             >
@@ -65,14 +64,14 @@ export default function EditProduct() {
             <div className="min-h-screen bg-gray-100 p-4">
                 <div className="max-w-2xl mx-auto">
                     {/* Header */}
-                   
+
 
                     {/* Form */}
-                    <form className="bg-white rounded-lg shadow-sm p-8">
-                         <div className="mb-6">
-                        <h1 className="bg-gray-700 text-3xl font-bold text-white p-6 text-center rounded-md">Edit Advert</h1>
-                       
-                    </div>
+                    <form action={putProduct} className="bg-white rounded-lg shadow-sm p-8">
+                        <div className="mb-6">
+                            <h1 className="bg-gray-700 text-3xl font-bold text-white p-6 text-center rounded-md">Edit Advert</h1>
+
+                        </div>
                         <div className="flex flex-col gap-4">
                             {/* Product Title */}
                             <div className="flex flex-col">
@@ -87,7 +86,7 @@ export default function EditProduct() {
                                     </span>
                                     <input
                                         type="text"
-                                        name="productTitle"
+                                        name="title"
 
                                         placeholder="e.g., Premium Brake Pads Set - Front"
                                         className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -128,12 +127,18 @@ export default function EditProduct() {
                                     <select
                                         name="category"
 
-                                        className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none bg-white"
+                                        className="w-full px-4 py-2 border-1 text-gray-700 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none bg-white"
                                         required
                                     >
-
-                                        <option>
-                                        </option>
+                                        <option selected>select your category</option>
+                                        <option >Engine & Mechanical Components</option>
+                                        <option>Suspension and Steering</option>
+                                        <option>Braking System</option>
+                                        <option>Electrical & Battery System</option>
+                                        <option>Lights & Indicators</option>
+                                        <option>Climate & Comfort</option>
+                                        <option>Body & Exterior</option>
+                                        <option>Interior Components</option>
 
                                     </select>
                                 </div>
@@ -178,13 +183,12 @@ export default function EditProduct() {
                                     <select
                                         name="condition"
 
-                                        className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none bg-white"
+                                        className="w-full px-4 py-3 border text-gray-700 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none bg-white"
                                         required
                                     >
 
-                                        <option>
-
-                                        </option>
+                                        <option> New </option>
+                                        <option> Used </option>
 
                                     </select>
                                 </div>
@@ -215,7 +219,7 @@ export default function EditProduct() {
                                     <div className="text-blue-600 mb-2">
                                         <SquarePen className="w-8 h-8 mx-auto mb-2" />
                                     </div>
-                                    <input type="file" className='flex justify-center items-center ml-10 border rounded-md bg-gray-100' />
+                                    <input name='images' type="file" className='flex justify-center items-center ml-10 border rounded-md bg-gray-100' />
 
                                     <p className="text-sm text-blue-700 mb-1">
                                         Upload an image of your product,

@@ -8,6 +8,8 @@ import { apiFetcher } from '../api/client';
 
 
 
+
+
 export default function VendorDashboard() {
     const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : false;
     const roleChecker = user.role == 'vendor' ? true : false;
@@ -34,9 +36,9 @@ export default function VendorDashboard() {
     const { data, error, isLoading } = useSWR("/adverts/my-adverts", apiFetcher);
     // useEffect(() => {
 
-        console.log(data);
-        
-        
+    console.log(data);
+
+
 
     // }, []);
 
@@ -161,6 +163,11 @@ export default function VendorDashboard() {
             </tr>
         ));
     };
+
+
+    if (!localStorage.getItem("token")) {
+        return <Navigate to={"/login"} />
+    }
 
 
 
