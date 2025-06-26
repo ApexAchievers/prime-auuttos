@@ -59,6 +59,18 @@ export default function Register() {
             <h1 className="text-white text-3xl sm:text-4xl font-bold mb-2">
               Welcome To Prime Auuttos
             </h1>
+
+            <div className="flex items-center gap-3">
+              <h1 className="text-sm font-semibold">{data?.fullname || "Unknown User"}</h1>
+              <button
+                onClick={logout}
+                className="flex items-center gap-1 bg-white text-black px-3 py-1 rounded-full hover:bg-gray-200 text-sm font-medium transition"
+              >
+                <LogOut className="w-4 h-4" />
+                Logout
+              </button>
+            </div>
+            
             <p className="text-gray-300 text-xl sm:text-2xl font-semibold">
               Trust us for quality services
             </p>
@@ -91,7 +103,7 @@ export default function Register() {
                       value="user"
                       checked={role === "user"}
                       onChange={() => setRole("user")}
-                      className="mr-2 h-4 w-4 text-primary focus:ring-gray-500 border-gray-300"
+                      className="mr-2 h-4 w-4 text-indigo-600 focus:ring-gray-500 border-gray-300"
                     />
                     <User size={18} className="mr-1 text-gray-600" /> User
                   </label>
@@ -102,7 +114,7 @@ export default function Register() {
                       value="vendor"
                       checked={role === "vendor"}
                       onChange={() => setRole("vendor")}
-                      className="mr-2 h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300"
+                      className="mr-2 h-4 w-4 text-indigo-600 focus:ring-gray-500 border-gray-300"
                     />
                     <UserCheck size={18} className="mr-1 text-gray-600" />{" "}
                     Vendor
@@ -122,7 +134,7 @@ export default function Register() {
                   name="fullname"
                   placeholder="Kojo Afriyie"
                   required
-                  className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
                 />
               </div>
 
@@ -139,7 +151,7 @@ export default function Register() {
                   name="email"
                   placeholder="youremail@example.com"
                   required
-                  className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
                 />
               </div>
 
@@ -156,7 +168,7 @@ export default function Register() {
                   name="password"
                   placeholder="********"
                   required
-                  className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
                 />
               </div>
 
@@ -173,7 +185,7 @@ export default function Register() {
                   name="confirmPassword"
                   placeholder="********"
                   required
-                  className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
                 />
               </div>
 
@@ -208,7 +220,7 @@ export default function Register() {
                       name="companyName"
                       placeholder="Prime Autos Ltd."
                       required
-                      className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
                     />
                   </div>
 
@@ -225,7 +237,7 @@ export default function Register() {
                       name="businessAddress"
                       placeholder="123 Prime Street, Accra"
                       required
-                      className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
                     />
                   </div>
                 </>
@@ -251,7 +263,7 @@ export default function Register() {
               <div className="pt-2 sm:pt-4 flex justify-center">
                 <SubmitButton
                   title={"Register"}
-                  className="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-medium transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="px-6 py-3 bg-primary text-white rounded-lg hover:bg-gray-700 font-medium transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 />
               </div>
             </form>
