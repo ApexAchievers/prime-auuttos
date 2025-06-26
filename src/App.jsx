@@ -11,6 +11,7 @@ import CartTest from "./pages/CartTestPage";
 import CartProvider from "./context/CartContext";
 import NotFound from "./pages/NotFound";
 
+import SingleAdvert from "./pages/SingleAdvert";
 import BatteryElectricity from "./pages/BatteryElectricity";
 import BikeAccessories from "./pages/BikeAccessories";
 import BodyExterior from "./pages/BodyExterior";
@@ -38,6 +39,7 @@ const primeAuttosRouter = createBrowserRouter([
       { path: "/edit-product", element: <EditProduct /> },
       { path: "/view-product", element: <ViewProduct /> },
       { path: "/vendor-dashboard", element: <VendorDashboard /> },
+      { path: "/single-advert", element: <SingleAdvert /> },
       { path: "/battery-electricity", element: <BatteryElectricity /> },
       { path: "/bike-accessories", element: <BikeAccessories /> },
       { path: "/body-exterior", element: <BodyExterior /> },
