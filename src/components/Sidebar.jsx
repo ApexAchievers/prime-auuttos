@@ -10,6 +10,9 @@ export default function Sidebar({ isOpen }) {
        <li className="flex items-center gap-2 "><Home size={18} /> Home</li>
          <Link to="/contact"><li className="flex items-center gap-2"><Phone size={18} /> Contact</li></Link>
 
+         
+         <Link to="/vendor-dashboard"><li className="flex items-center gap-2"><Phone size={18} /> Vendor Dashborad</li></Link>
+
         <li className="text-white mt-6 ">
           <div className="flex items-center gap-2 text-gray-600"><Layers size={18} /> Categories</div>
           <ul className="ml-6 mt-4 space-y-6 text-sm list-disc">
