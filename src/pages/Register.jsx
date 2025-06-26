@@ -5,6 +5,7 @@ import { User, UserCheck, LogOut } from "lucide-react";
 import { apiClient } from "../api/client";
 import useSWR from "swr";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 
 export default function Register() {
@@ -23,12 +24,17 @@ export default function Register() {
       console.log(response.data);
 
       localStorage.setItem("email", response.data.user.email);
-
+    if(response.success === 200 || 201){
+      toast.success("Register Successfull")
+    }
       navigate("/otp?");
 
       
     } catch (error) {
       console.log(error);
+      if(error){
+        toast.error(error.message)
+      }
     }
   };
 

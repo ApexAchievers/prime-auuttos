@@ -5,35 +5,36 @@ import { useState } from "react";
 import { Link } from "react-router";
 import { apiClient } from "../api/client";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 export default function Login() {
   const navigate = useNavigate();
 
   const [role, setRole] = useState("user");
-  
 
   const userLogin = async (data) => {
-
-    try{
+    try {
       const response = await apiClient.post("/auth/login", data, {
         headers: {
-          "Content-Type":"application/json"
-        }
-      }
-        
-       );
+          "Content-Type": "application/json",
+        },
+      });
       console.log(response.data);
-      localStorage.setItem('token', response.data.token);
-      localStorage.setItem('user', JSON.stringify(response.data.user));
-      navigate('/');
 
+      if (response.success === 200 || 201) {
+        toast.success("Login Successfull");
+      }
+
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+      navigate("/");
     } catch (error) {
       console.log(error);
+      if (error) {
+        toast.error(error.message);
+      }
     }
-    
-  }
-
-
+  };
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row">

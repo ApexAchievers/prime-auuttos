@@ -29,8 +29,7 @@ import Services from "./pages/Services";
 import SuspensionSteering from "./pages/SuspensionSteering";
 import TransmissionDrivetrain from "./pages/TransmissionDrivetrain";
 import Payment from "./pages/Payment";
-
-
+import { ToastContainer } from "react-toastify";
 
 const primeAuttosRouter = createBrowserRouter([
   {
@@ -65,18 +64,14 @@ const primeAuttosRouter = createBrowserRouter([
       { path: "/terms-conditions", element: <TermsConditions /> },
       { path: "/contact", element: <Contact /> },
       { path: "/otp?", element: <Otp /> },
-
-
-    ]
-  }
+    ],
+  },
 ]);
-
-
- 
 
 function App() {
   return (
     <CartProvider>
+      <ToastContainer />
       <RouterProvider router={primeAuttosRouter} />
     </CartProvider>
   );
