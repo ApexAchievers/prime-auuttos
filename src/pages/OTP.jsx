@@ -31,7 +31,7 @@ const navigate = useNavigate();
       if(response?.data?.user.role === "user") {
         navigate('/')
       }else {
-        navigate('/vendor-dashboard')
+        navigate('/payment')
       }
 
     } catch (err) {
