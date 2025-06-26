@@ -98,7 +98,7 @@ const featuredProducts = [
   // Row 3 - 4 items
   {
     id: 7,
-    name: 'Cycling Essentials',
+    name: 'Cycling Essentials', 
     image: pc2,
     link: '/cycling-essentials',
   },

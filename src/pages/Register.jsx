@@ -1,10 +1,11 @@
 import { useState } from "react";
 import backgroundVideo from "../assets/videos/background-2.mp4";
 import SubmitButton from "../components/SubmitButton";
-import { User, UserCheck } from "lucide-react";
+import { User, UserCheck, LogOut } from "lucide-react";
 import { apiClient } from "../api/client";
 import useSWR from "swr";
 import { useNavigate } from "react-router";
+
 
 export default function Register() {
   const navigate = useNavigate();
@@ -14,25 +15,24 @@ export default function Register() {
   const [role, setRole] = useState("user");
 
   const registerUser = async (data) => {
-    if (role == 'vendor') {
+    if (role == "vendor") {
       data.role = role;
     }
     try {
       const response = await apiClient.post("/auth/signup", data);
       console.log(response.data);
 
-      localStorage.setItem('email', response.data.user.email)
+      localStorage.setItem("email", response.data.user.email);
 
-      navigate('/otp?');
+      navigate("/otp?");
 
-      // // if (response.data.success || response.data.otpSent) {
-      //   setShowOtpPopup(true);
-      // // }
-
+      
     } catch (error) {
       console.log(error);
     }
   };
+
+  
 
   return (
     <>
@@ -60,17 +60,6 @@ export default function Register() {
               Welcome To Prime Auuttos
             </h1>
 
-            <div className="flex items-center gap-3">
-              <h1 className="text-sm font-semibold">{data?.fullname || "Unknown User"}</h1>
-              <button
-                onClick={logout}
-                className="flex items-center gap-1 bg-white text-black px-3 py-1 rounded-full hover:bg-gray-200 text-sm font-medium transition"
-              >
-                <LogOut className="w-4 h-4" />
-                Logout
-              </button>
-            </div>
-            
             <p className="text-gray-300 text-xl sm:text-2xl font-semibold">
               Trust us for quality services
             </p>
@@ -189,23 +178,6 @@ export default function Register() {
                 />
               </div>
 
-              {/* <div className="flex flex-col">
-                <label
-                  htmlFor="number"
-                  className="text-sm font-semibold text-gray-700 mb-1"
-                >
-                  ENTER YOUR PHONE NUMBER
-                </label>
-                <input
-                  type="tel"
-                  id="number"
-                  name="number"
-                  placeholder="0248796134"
-                  required
-                  className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                />
-              </div> */}
-
               {role === "vendor" && (
                 <>
                   <div className="flex flex-col">
@@ -270,9 +242,6 @@ export default function Register() {
           </div>
         </div>
       </div>
-
-     
-
     </>
   );
 }

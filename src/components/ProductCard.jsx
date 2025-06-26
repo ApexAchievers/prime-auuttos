@@ -1,5 +1,6 @@
 import pc6 from '../assets/images/pc6.PNG';
 import { ShoppingCart } from 'lucide-react';
+import { Link } from 'react-router';
 
 
 export default function ProductCard({ viewMode}) {
@@ -20,14 +21,17 @@ export default function ProductCard({ viewMode}) {
                     Premium Ceramic Brake Pads
                 </h1>
                 
-                <h2 className="text-base font-bold text-green-500 mb-1">$49.99</h2>
+                <h2 className="text-base font-bold text-green-500 mb-1">₵2,280</h2>
                 <h3 className="text-xs text-gray-500 mb-3">
                     Vendor: AutoZone
                 </h3>
                 <div className="flex gap-2">
-                    <button className="flex-1 bg-orange-700 text-white py-1 rounded-md hover:bg-white hover:text-orange-700 hover:border-1 hover:border-orange-700 transition-colors text-xs font-medium">
+                    <Link to='/single-advert'>
+                    <button className="flex-1 w-20 bg-orange-700 text-white py-1 rounded-md hover:bg-white hover:text-orange-700 hover:border-1 hover:border-orange-700 transition-colors text-xs font-medium">
                         View
                     </button>
+                    </Link>
+                    
                     <button
                   onClick={() => handleAddToCart(product)}
                   className="w-24 bg-gray-700 text-white py-1 px-2 rounded-md hover:bg-black transition-colors flex items-center justify-center space-x-1 text-xs"
