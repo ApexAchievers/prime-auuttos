@@ -39,20 +39,20 @@ export default function Register() {
       {/* Main Container */}
       <div className="min-h-screen flex flex-col md:flex-row">
         {/* Video On The Left - Adjusted to cover properly */}
-        <div className="w-full md:w-1/2 relative h-64 md:h-auto overflow-hidden">
+        <div className="w-full md:w-1/2 relative flex items-center justify-center overflow-hidden">
           <video
             autoPlay
             muted
             loop
             playsInline
-            className="absolute top-0 left-0 w-full h-full object-cover z-0"
+            className="absolute inset-0 w-full h-full object-cover z-0"
           >
             <source src={backgroundVideo} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
 
           {/* Overlay for readability */}
-          <div className="absolute inset-0 bg-black/50 z-10" />
+          <div className="absolute inset-0 bg-black/30 z-10" />
 
           {/* Text content on video */}
           <div className="relative z-20 flex flex-col items-center justify-center h-full px-4 sm:px-6 md:px-8 text-center">
@@ -70,7 +70,7 @@ export default function Register() {
           <div className="w-full max-w-md space-y-6">
             <div className="text-center">
               <h3 className="text-2xl font-bold text-black">
-                PRIME <span className="text-indigo-600">AUUTTOS</span>
+                PRIME <span className="text-primary">AUUTTOS</span>
               </h3>
               <h2 className="text-lg text-gray-600 mt-2">
                 Register With Prime Auuttos
@@ -91,7 +91,7 @@ export default function Register() {
                       value="user"
                       checked={role === "user"}
                       onChange={() => setRole("user")}
-                      className="mr-2 h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300"
+                      className="mr-2 h-4 w-4 text-primary focus:ring-gray-500 border-gray-300"
                     />
                     <User size={18} className="mr-1 text-gray-600" /> User
                   </label>
