@@ -2,11 +2,30 @@ import { useState } from 'react';
 import { Upload, File } from 'lucide-react';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
+import { apiClient } from '../api/client';
+
+
 
 
 
 export default function PostAdvert() {
-    
+
+    const postAdvert = async (data) => {
+        const token = localStorage.getItem('token');
+        try {
+            const response = await apiClient.post('/adverts', data, {
+                headers: {
+                    "Content-Type": "application/json",
+                    'Authorization': `Bearer ${token}`
+                } 
+            });;
+
+            console.log(response);
+            // Navigate("/");
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     return (
 
@@ -14,11 +33,11 @@ export default function PostAdvert() {
 
             <div className="min-h-screen bg-gray-100 p-4 bg-[url('./assets/images/dashboardbg.jpg')] bg-cover bg-center rounded-md">
                 <div className="max-w-2xl mx-auto">
-                    {/* Header */}
+                    {/* Heade acr */}
 
 
                     {/* Form */}
-                    <form className="bg-white rounded-lg shadow-sm p-8">
+                    <form action={postAdvert} className="bg-white rounded-lg shadow-sm p-8">
 
                         <div className="mb-8">
                             <h1 className="bg-gray-700 text-3xl font-bold text-white p-6 text-center rounded-md">Post New Advert</h1>
@@ -39,7 +58,7 @@ export default function PostAdvert() {
                                     </span>
                                     <input
                                         type="text"
-                                        name="productTitle"
+                                        name="title"
 
                                         placeholder="e.g., Premium Brake Pads Set - Front"
                                         className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -55,7 +74,7 @@ export default function PostAdvert() {
                                         Make <span className="text-red-500">*</span>
                                     </label>
                                     <select
-                                        name="condition"
+                                        name="Make"
 
                                         className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none bg-white"
                                         required
@@ -108,7 +127,7 @@ export default function PostAdvert() {
                                         Model <span className="text-red-500">*</span>
                                     </label>
                                     <select
-                                        name="condition"
+                                        name="Model"
 
                                         className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none bg-white"
                                         required
@@ -427,7 +446,7 @@ export default function PostAdvert() {
                                     <div className="text-blue-600 mb-2">
                                         <Upload className="w-8 h-8 mx-auto mb-2" />
                                     </div>
-                                    <input type="file" className='flex justify-center items-center ml-10 border rounded-md bg-gray-100' />
+                                    <input type="file" name='images' className='flex justify-center items-center ml-10 border rounded-md bg-gray-100' />
 
                                     <p className="text-sm text-blue-700 mb-1">
                                         Upload an image of your product,

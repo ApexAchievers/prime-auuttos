@@ -1,143 +1,45 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Plus, Edit, Trash2, Eye, ToggleLeft, ToggleRight, ChevronLeft, ChevronRight, LogOut, User, X, Settings, Search, Filter, Camera, Upload } from 'lucide-react';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import PostAdvert from './AddProduct';
 import Footer from '../components/Footer';
+import useSWR from 'swr';
+import { apiFetcher } from '../api/client';
+
+
 
 export default function VendorDashboard() {
+    const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : false;
+    const roleChecker = user.role == 'vendor' ? true : false;
+
     const [currentPage, setCurrentPage] = useState(1);
     const [showProfileModal, setShowProfileModal] = useState(false);
-
+    const navigate = useNavigate();
     const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
     const [showFilters, setShowFilters] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
     const [filters, setFilters] = useState({ category: '', status: '', brand: '' });
+    const [profileData, setProfileData] = useState({
+        name: 'Kojo Oppong',
+        email: 'princedarf1@gmail.com',
+        phone: '+233 24 123 4567',
+        company: 'Auto Parts Ghana',
+        address: 'Accra, Ghana'
+    });
 
 
     const itemsPerPage = 10;
 
-    const advert = [
-        // {
-        //     id: 1,
-        //     image: 'https://neobrake.com/wp-content/uploads/2016/06/NeoBrake-Air-Disc-Brake-Pads-2.1.png',
-        //     title: 'Ceramic Brake Pads',
-        //     brand: 'Bosch',
-        //     category: 'Braking System',
-        //     status: 'Available',
-        //     created: '2025-06-01T10:00:00Z',
-        //     price: 'GHc75.00',
-        // },
-        // {
-        //     id: 4,
-        //     image: 'https://neobrake.com/wp-content/uploads/2016/06/NeoBrake-Air-Disc-Brake-Pads-2.1.png',
-        //     title: 'Ceramic Brake Pads',
-        //     brand: 'Bosch',
-        //     category: 'Braking System',
-        //     status: 'Available',
-        //     created: '2025-06-01T10:00:00Z',
-        //     price: 'GHc75.00',
-        // },
-        // {
-        //     id: 2,
-        //     image: 'https://media.istockphoto.com/id/1282831927/photo/power-steering-rack.jpg?s=612x612&w=0&k=20&c=RSzMcW5KifTRjsea8B0rOCYd4aeD_CcBfdQlgWuTgx4=',
-        //     title: 'Steering Rack',
-        //     brand: 'Toyota',
-        //     category: 'Steering System',
-        //     status: 'Not available',
-        //     created: '2025-06-01T10:00:00Z',
-        //     price: 'GHc400.00',
-        // },
-        // {
-        //     id: 3,
-        //     image: 'https://media.istockphoto.com/id/1282831927/photo/power-steering-rack.jpg?s=612x612&w=0&k=20&c=RSzMcW5KifTRjsea8B0rOCYd4aeD_CcBfdQlgWuTgx4=',
-        //     title: 'Power Steering Pump',
-        //     brand: 'Honda',
-        //     category: 'Steering System',
-        //     status: 'Available',
-        //     created: '2025-06-01T10:00:00Z',
-        //     price: 'GHc350.00',
-        // },
-        // {
-        //     id: 5,
-        //     image: 'https://media.istockphoto.com/id/1282831927/photo/power-steering-rack.jpg?s=612x612&w=0&k=20&c=RSzMcW5KifTRjsea8B0rOCYd4aeD_CcBfdQlgWuTgx4=',
-        //     title: 'Oil Filter',
-        //     brand: 'Fram',
-        //     category: 'Engine Parts',
-        //     status: 'Available',
-        //     created: '2025-06-01T10:00:00Z',
-        //     price: 'GHc25.00',
-        // },
-        // {
-        //     id: 6,
-        //     image: 'https://media.istockphoto.com/id/1282831927/photo/power-steering-rack.jpg?s=612x612&w=0&k=20&c=RSzMcW5KifTRjsea8B0rOCYd4aeD_CcBfdQlgWuTgx4=',
-        //     title: 'Air Filter',
-        //     brand: 'K&N',
-        //     category: 'Engine Parts',
-        //     status: 'Not available',
-        //     created: '2025-06-01T10:00:00Z',
-        //     price: 'GHc45.00',
-        // },
-        // {
-        //     id: 7,
-        //     image: 'https://media.istockphoto.com/id/1282831927/photo/power-steering-rack.jpg?s=612x612&w=0&k=20&c=RSzMcW5KifTRjsea8B0rOCYd4aeD_CcBfdQlgWuTgx4=',
-        //     title: 'Spark Plugs',
-        //     brand: 'NGK',
-        //     category: 'Engine Parts',
-        //     status: 'Available',
-        //     created: '2025-06-01T10:00:00Z',
-        //     price: 'GHc15.00',
-        // },
-        // {
-        //     id: 8,
-        //     image: 'https://media.istockphoto.com/id/1282831927/photo/power-steering-rack.jpg?s=612x612&w=0&k=20&c=RSzMcW5KifTRjsea8B0rOCYd4aeD_CcBfdQlgWuTgx4=',
-        //     title: 'Brake Discs',
-        //     brand: 'Brembo',
-        //     category: 'Braking System',
-        //     status: 'Available',
-        //     created: '2025-06-01T10:00:00Z',
-        //     price: 'GHc120.00',
-        // },
-        // {
-        //     id: 9,
-        //     image: 'https://media.istockphoto.com/id/1282831927/photo/power-steering-rack.jpg?s=612x612&w=0&k=20&c=RSzMcW5KifTRjsea8B0rOCYd4aeD_CcBfdQlgWuTgx4=',
-        //     title: 'Headlight Bulbs',
-        //     brand: 'Philips',
-        //     category: 'Electrical',
-        //     status: 'Available',
-        //     created: '2025-06-01T10:00:00Z',
-        //     price: 'GHc30.00',
-        // },
-        // {
-        //     id: 10,
-        //     image: 'https://media.istockphoto.com/id/1282831927/photo/power-steering-rack.jpg?s=612x612&w=0&k=20&c=RSzMcW5KifTRjsea8B0rOCYd4aeD_CcBfdQlgWuTgx4=',
-        //     title: 'Battery',
-        //     brand: 'Exide',
-        //     category: 'Electrical',
-        //     status: 'Not available',
-        //     created: '2025-06-01T10:00:00Z',
-        //     price: 'GHc180.00',
-        // },
-        // {
-        //     id: 11,
-        //     image: 'https://media.istockphoto.com/id/1282831927/photo/power-steering-rack.jpg?s=612x612&w=0&k=20&c=RSzMcW5KifTRjsea8B0rOCYd4aeD_CcBfdQlgWuTgx4=',
-        //     title: 'Alternator',
-        //     brand: 'Bosch',
-        //     category: 'Electrical',
-        //     status: 'Available',
-        //     created: '2025-06-01T10:00:00Z',
-        //     price: 'GHc250.00',
-        // },
-        {
-            id: 12,
-            image: 'https://media.istockphoto.com/id/1282831927/photo/power-steering-rack.jpg?s=612x612&w=0&k=20&c=RSzMcW5KifTRjsea8B0rOCYd4aeD_CcBfdQlgWuTgx4=',
-            title: 'Radiator',
-            brand: 'Denso',
-            category: 'Cooling System',
-            status: 'Available',
-            created: '2025-06-01T10:00:00Z',
-            price: 'GHc320.00',
-        },
-    ];
+    const [advert, setAdvert] = useState([]);
+    const { data, error, isLoading } = useSWR("/adverts/my-adverts", apiFetcher);
+    // useEffect(() => {
+
+        console.log(data);
+        
+        
+
+    // }, []);
+
 
     // Get unique values for filter options
     const categories = [...new Set(advert.map(ad => ad.category))];
@@ -184,14 +86,24 @@ export default function VendorDashboard() {
         setCurrentPage(1);
     };
 
-
+    const handleProfileUpdate = () => {
+        console.log('Profile updated:', profileData);
+        setShowProfileModal(false);
+    };
 
     const handleLogout = () => {
         console.log('Logging out...');
+        localStorage.clear();
+        navigate('/login')
         setShowLogoutConfirm(false);
     };
 
-
+    const handleInputChange = (field, value) => {
+        setProfileData(prev => ({
+            ...prev,
+            [field]: value
+        }));
+    };
 
 
     const renderAdverts = () => {
