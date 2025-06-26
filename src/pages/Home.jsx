@@ -171,11 +171,11 @@ export default function Home() {
   return (
 
     <>
-      <Navbar />
+    
       <div className="min-h-screen bg-white">
 
         {/* Hero Section with Auto-scrolling Images */}
-        <div className="bg-white py-5 md:py-12 mt-20">
+        <div className="bg-white py-5 md:py-12">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="relative h-[300px] md:h-[400px] lg:h-[500px] overflow-hidden rounded-sm shadow-xl -mt-12">
               {!isFading ? (
