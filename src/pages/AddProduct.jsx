@@ -320,7 +320,7 @@ export default function PostAdvert() {
                                             type="text"
                                             name="location"
 
-                                            placeholder="eg; 1995"
+                                            placeholder="abossey okai"
                                             className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none bg-white"
                                             required
                                             min="1985"
