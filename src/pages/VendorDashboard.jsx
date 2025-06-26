@@ -256,7 +256,7 @@ export default function VendorDashboard() {
                 {/*Table icons */}
                 <td className="py-2 px-4 sm:px-3">
                     <div className="flex gap-1 justify-center">
-                        <Link to="/view-product">
+                        <Link to="/single-advert">
                             <button
                                 className="w-6 h-6 flex items-center justify-center rounded bg-blue-50 text-blue-600 hover:bg-blue-100 hover:scale-110 transition-all duration-200"
                                 title="View"
