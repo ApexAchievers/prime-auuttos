@@ -1,63 +1,41 @@
 import { useState } from 'react';
 import { Upload, File } from 'lucide-react';
 import Footer from '../components/Footer';
+import { apiClient } from '../api/client';
+
+
 
 
 
 export default function PostAdvert() {
-    // const [formData, setFormData] = useState({
-    //     productTitle: '',
-    //     price: '',
-    //     category: '',
-    //     brand: '',
-    //     partNumber: '',
-    //     condition: 'New',
-    //     description: '',
-    //     images: []
-    // });
 
-    // const categories = [
-    //     'Select Category',
-    //     'Engine & Mechanical Components',
-    //     'Transmission and Drivetrain',
-    //     'Suspension and Steering',
-    //     'Braking System',
-    //     'Electrical and Battery System',
-    //     'Lights & Indicators',
-    //     'Climate & Comfort',
-    //     'Body & Exterior',
-    //     'Interior Components',
+    const postAdvert = async (data) => {
+        const token = localStorage.getItem('token');
+        try {
+            const response = await apiClient.post('/adverts', data, {
+                headers: {
+                    "Content-Type": "application/json",
+                    'Authorization': `Bearer ${token}`
+                } 
+            });;
 
-    // ];
-
-    // const conditions = ['New', 'Used', 'Refurbished'];
-
-    // const handleInputChange = (e) => {
-    //     const { name, value } = e.target;
-    //     setFormData(prev => ({
-    //         ...prev,
-    //         [name]: value
-    //     }));
-    // };
-
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     console.log('Form submitted:', formData);
-    //     // Handle form submission logic here
-    // };
-
-
+            console.log(response);
+            // Navigate("/");
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     return (
 
         <>
             <div className="min-h-screen bg-gray-100 p-4 bg-[url('./assets/images/dashboardbg.jpg')] bg-cover bg-center rounded-md">
                 <div className="max-w-2xl mx-auto">
-                    {/* Header */}
+                    {/* Heade acr */}
 
 
                     {/* Form */}
-                    <form className="bg-white rounded-lg shadow-sm p-8">
+                    <form action={postAdvert} className="bg-white rounded-lg shadow-sm p-8">
 
                         <div className="mb-8">
                             <h1 className="bg-gray-700 text-3xl font-bold text-white p-6 text-center rounded-md">Post New Advert</h1>
@@ -70,7 +48,7 @@ export default function PostAdvert() {
                                 <label className="text-sm font-medium text-gray-700 mb-2">
                                     Product Title <span className="text-red-500">*</span>
                                 </label>
-                                <div className="relative flex items-center"> 
+                                <div className="relative flex items-center">
                                     <span className="absolute left-3 text-gray-400">
                                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
@@ -78,7 +56,7 @@ export default function PostAdvert() {
                                     </span>
                                     <input
                                         type="text"
-                                        name="productTitle"
+                                        name="title"
 
                                         placeholder="e.g., Premium Brake Pads Set - Front"
                                         className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -94,7 +72,7 @@ export default function PostAdvert() {
                                         Make <span className="text-red-500">*</span>
                                     </label>
                                     <select
-                                        name="condition"
+                                        name="Make"
 
                                         className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none bg-white"
                                         required
@@ -149,7 +127,7 @@ export default function PostAdvert() {
                                         Model <span className="text-red-500">*</span>
                                     </label>
                                     <select
-                                        name="condition"
+                                        name="Model"
 
                                         className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none bg-white"
                                         required
@@ -468,7 +446,7 @@ export default function PostAdvert() {
                                     <div className="text-blue-600 mb-2">
                                         <Upload className="w-8 h-8 mx-auto mb-2" />
                                     </div>
-                                    <input type="file" className='flex justify-center items-center ml-10 border rounded-md bg-gray-100' />
+                                    <input type="file" name='images' className='flex justify-center items-center ml-10 border rounded-md bg-gray-100' />
 
                                     <p className="text-sm text-blue-700 mb-1">
                                         Upload an image of your product,
