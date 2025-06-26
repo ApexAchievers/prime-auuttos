@@ -4,20 +4,44 @@ import { Moon } from 'lucide-react';
 import Footer from '../components/Footer';
 
 export function useDarkMode() {
-    const [isDark, setIsDark] = useState(true);
+    
+    const navigate = useNavigate();
 
-    useEffect(() => {
-        const userPref = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        setIsDark(userPref);
-        document.documentElement.classList.toggle('dark', userPref);
-    }, []);
+  const [SearchParams] = useSearchParams();
+  const id = SearchParams.get("id");
 
-    const toggleTheme = () => {
-        document.documentElement.classList.toggle('dark');
-        setIsDark((prev) => !prev);
-    };
+  const [book, setBook] = useState({});
 
-    return { isDark, toggleTheme };
+  const getBook = () => {
+    apiClient
+      .get(`/api/v1/books/${id}`)
+      .then((response) => {
+        console.log(response.data);
+        setBook(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  useEffect(getBook, []);
+
+  const putBook = async (data) => {
+    // Post Data To Api
+   try {
+      const response = await apiClient
+        .put(`/api/v1/books/${id}`, data, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+      console.log(response);
+      navigate(-1);
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
 }
 
 
