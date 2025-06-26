@@ -62,6 +62,8 @@ const primeAuttosRouter = createBrowserRouter([
       { path: "/transmission-drivetrain", element: <TransmissionDrivetrain /> },
       { path: "/cart-test", element: <CartTest /> },
       { path: "*", element: <NotFound /> },
+      { path: "/terms-conditions", element: <TermsConditions /> },
+      { path: "/contact", element: <Contact /> },
 
     ]
   }
